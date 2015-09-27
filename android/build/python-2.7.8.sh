@@ -1,18 +1,30 @@
 #/bin/bash
+
+./python/pgen --help > /dev/null 2>&1 && canpgen="yes" || canpgen="no"
+if [ $canpgen = "no" ]; then
+  echo "===================================================================="
+  echo "if on your system, the binary of pgen cannot be executed; please go"
+  echo "to Python source directory and run some commands:"
+  echo "   ./configure && make"
+  echo "wait for pgen is generated and copy it to python folder under this"
+  echo "directoy. Then run me again."
+  echo "===================================================================="
+  exit 1
+fi
+
 set -xe
 
 # please compile openssl zlib first
 MEDIR=$(cd `dirname $0`; pwd)
-ME=python-2.7.8
+ME=Python-2.7.8
 
 cd $MEDIR
 source common.sh
 
 cd ..
 rm -rf $ME
-tar zxf $SRCTARBALL/$ME.tar.gz
-mv Python-2.7.8 $ME
 
+tar zxf $SRCTARBALL/$ME.tgz
 cd $ME
 mkdir -p dist
 
@@ -66,4 +78,3 @@ mkdir -p ../bin/$ME
 mv dist/* ../bin/$ME/
 cd ..
 rm -rf $ME
-

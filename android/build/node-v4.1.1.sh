@@ -1,4 +1,17 @@
 #/bin/bash
+
+echo "===================================================================="
+echo "Notice: if it throws error and report something wrong"
+echo "about '.node_repl_history' to run ./node, please open"
+echo "'lib/internal/repl.js' under source code directory,"
+echo "find this line:"
+echo "   historyPath = path.join(os.homedir(), '.node_repl_history');"
+echo " and fix the path like:"
+echo "   historyPath = '/data/local/tmp/.node_repl_history';"
+echo " then rebuild nodejs."
+echo "===================================================================="
+sleep 2
+
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
@@ -8,8 +21,8 @@ cd $MEDIR
 source common.sh
 
 cd ..
-#rm -rf $ME
-#tar zxf $SRCTARBALL/$ME.tar.gz
+rm -rf $ME
+tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out
 
@@ -28,13 +41,3 @@ export LDFLAGS="$LDFLAGS $CXXLIBPLUS -lgnustl_shared -lgnustl_static -lsupc++"
 make
 make_install $ME
 
-echo "===================================================================="
-echo "Notice: if it throws error and report something wrong"
-echo "about '.node_repl_history' to run ./node, please open"
-echo "'lib/internal/repl.js' under source code directory,"
-echo "find this line:"
-echo "   historyPath = path.join(os.homedir(), '.node_repl_history');"
-echo " and fix the path like:"
-echo "   historyPath = '/data/local/tmp/.node_repl_history';"
-echo " then rebuild nodejs."
-echo "===================================================================="
