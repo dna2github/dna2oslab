@@ -1,20 +1,13 @@
 #/bin/bash
 
-./python/pgen --help > /dev/null 2>&1 && canpgen="yes" || canpgen="no"
-if [ $canpgen = "no" ]; then
-  echo "===================================================================="
-  echo "if on your system, the binary of pgen cannot be executed; please go"
-  echo "to Python source directory and run some commands:"
-  echo "   ./configure && make"
-  echo "wait for pgen is generated and copy it to python folder under this"
-  echo "directoy. Then run me again."
-  echo "===================================================================="
-  exit 1
-fi
+echo "===================================================================="
+echo "to make pgen on Mac, please search for next '-lutil' in this script"
+echo "and then replace it with '-framework CoreFoundation'"
+echo "===================================================================="
 
 set -xe
 
-# please compile openssl zlib first
+# please compile openssl zlib ncurses sqlite first
 MEDIR=$(cd `dirname $0`; pwd)
 ME=Python-2.7.8
 
@@ -28,15 +21,15 @@ tar zxf $SRCTARBALL/$ME.tgz
 cd $ME
 mkdir -p dist
 
-export CFLAGS="$CFLAGS -I$MEDIR/../ncurses-5.9/include -I$MEDIR/../ncurses-5.9/include/ncurses -I$MEDIR/../openssl-1.0.1j/include -I$MEDIR/../openssl-1.0.1j/include/openssl -I$MEDIR/../sqlite-autoconf-3080701/include -I$MEDIR/../zlib-1.2.8/include -R/system/lib"
-export CXXFLAGS="$CXXFLAGS -I$MEDIR/../ncurses-5.9/include -I$MEDIR/../ncurses-5.9/include/ncurses -I$MEDIR/../openssl-1.0.1j/include -I$MEDIR/../openssl-1.0.1j/include/openssl -I$MEDIR/../sqlite-autoconf-3080701/include -I$MEDIR/../zlib-1.2.8/include -R/system/lib"
-export LDFLAGS="$LDFLAGS -L$MEDIR/../ncurses-5.9/lib -L$MEDIR/../openssl-1.0.1j/lib -L$MEDIR/../sqlite-autoconf-3080701/lib -L$MEDIR/../zlib-1.2.8/lib -R/system/lib"
+export CFLAGS="$CFLAGS -I$MEDIR/../ncurses-5.9/include -I$MEDIR/../ncurses-5.9/include/ncurses -I$MEDIR/../openssl-1.0.1p/include -I$MEDIR/../openssl-1.0.1p/include/openssl -I$MEDIR/../sqlite-autoconf-3080701/include -I$MEDIR/../zlib-1.2.8/include -R/system/lib"
+export CXXFLAGS="$CXXFLAGS -I$MEDIR/../ncurses-5.9/include -I$MEDIR/../ncurses-5.9/include/ncurses -I$MEDIR/../openssl-1.0.1p/include -I$MEDIR/../openssl-1.0.1p/include/openssl -I$MEDIR/../sqlite-autoconf-3080701/include -I$MEDIR/../zlib-1.2.8/include -R/system/lib"
+export LDFLAGS="$LDFLAGS -L$MEDIR/../ncurses-5.9/lib -L$MEDIR/../openssl-1.0.1p/lib -L$MEDIR/../sqlite-autoconf-3080701/lib -L$MEDIR/../zlib-1.2.8/lib -R/system/lib"
 
 # fix ptmx and ptc
 # please investigate your Android in the /dev
 # if there is /dev/ptmx, ac_cv_file__dev_ptmx can be yes; or it should be no
 # the sane for /dev/ptc
-sed -i "s|if test \"x\$cross_compiling\" = xyes; then|ac_cv_file__dev_ptmx=yes\nac_cv_file__dev_ptc=no\nif test \"x\$cross_compiling\" = xyes; then|" configure
+sed -i "s|if test \"x\$cross_compiling\" = xyes; then|ac_cv_file__dev_ptmx=yes; ac_cv_file__dev_ptc=no; if test \"x\$cross_compiling\" = xyes; then|" configure
 
 # hardcode to fix locale problem
 # better to write a locale.h to fix it
@@ -64,8 +57,7 @@ cp $MEDIR/python/socketmodule.c Modules/
 # some files; however, with cross-compiling eanbled, pgen will be built
 # to the target binary not host binary, so that it cannot be executed
 sed -i "s|\$(PGEN):.*|\$(PGEN):|" Makefile
-sed -i "s|\$(CC) \$(OPT) \$(LDFLAGS) \$(PGENOBJS) \$(LIBS) -o \$(PGEN)|echo \"fake Parser/pgen\"|" Makefile
-cp $MEDIR/python/pgen Parser/
+sed -i "s|\$(CC) \$(OPT) \$(LDFLAGS) \$(PGENOBJS) \$(LIBS) -o \$(PGEN)|gcc -pthread -DNDEBUG -fwrapv -O3 -Wall -Wstrict-prototypes  Parser/acceler.c Parser/grammar1.c Parser/listnode.c Parser/node.c Parser/parser.c Parser/parsetok.c Parser/bitset.c Parser/metagrammar.c Parser/firstsets.c Parser/grammar.c Parser/pgen.c Objects/obmalloc.c Python/mysnprintf.c Python/pyctype.c Parser/tokenizer_pgen.c Parser/printgrammar.c Parser/pgenmain.c -lpthread -ldl -lutil -I. -IInclude -o Parser/pgen|" Makefile
 
 cp $ANDROID/lib/*.o ./
 mkdir -p build/temp.linux2-arm-2.7/libffi
