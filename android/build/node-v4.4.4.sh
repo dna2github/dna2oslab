@@ -15,7 +15,7 @@ sleep 2
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=node-v4.1.1
+ME=node-v4.4.4
 
 cd $MEDIR
 source common.sh
@@ -28,9 +28,9 @@ mkdir -p dist out
 
 cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi/lib* out/
 cp $ANDROID/lib/* out/
-cp $MEDIR/node_deps_uv_src_unix_core.c $MEDIR/../$ME/deps/uv/src/unix/core.c
 sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/fs.c
 sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/stream.c
+sed -i "s/path.join(os.homedir(), '.node_repl_history');/'\/data\/local\/tmp\/.node_repl_history';/" $MEDIR/../$ME/lib/internal/repl.js
 
 export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS"
 export CXXFLAGS="$CXXFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS -lgnustl_shared -lgnustl_static -lsupc++"
