@@ -1,5 +1,15 @@
 Android Platform Lab
 
+> Android 6 only supports binaries with PIE enabled
+
+Binary Test Machine:
+  Huawei Honor 5A (Android 6.0)
+
+Lab:
+- compile binaries
+    nginx-1.9.5 (nginx-1.9.5-pie.sh)
+
+> Android &lt;5
 
 Machine Configuration:
   Linux 64-bits
