@@ -8,6 +8,7 @@ Binary Test Machine:
 Lab:
 - compile binaries
     - nginx-1.9.5 (nginx-1.9.5-pie.sh) with [How to use compiled Nginx in APK](https://github.com/dna2github/dna2mtgol/tree/master/fileShare)
+    - python-2.7.8
 
 > Android &lt;5
 
