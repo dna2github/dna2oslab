@@ -21,9 +21,9 @@ tar zxf $SRCTARBALL/$ME.tgz
 cd $ME
 mkdir -p dist
 
-export CFLAGS="$CFLAGS -I$MEDIR/../ncurses-5.9/include -I$MEDIR/../ncurses-5.9/include/ncurses -I$MEDIR/../openssl-1.0.1p/include -I$MEDIR/../openssl-1.0.1p/include/openssl -I$MEDIR/../sqlite-autoconf-3080701/include -I$MEDIR/../zlib-1.2.8/include -R/system/lib"
-export CXXFLAGS="$CXXFLAGS -I$MEDIR/../ncurses-5.9/include -I$MEDIR/../ncurses-5.9/include/ncurses -I$MEDIR/../openssl-1.0.1p/include -I$MEDIR/../openssl-1.0.1p/include/openssl -I$MEDIR/../sqlite-autoconf-3080701/include -I$MEDIR/../zlib-1.2.8/include -R/system/lib"
-export LDFLAGS="$LDFLAGS -L$MEDIR/../ncurses-5.9/lib -L$MEDIR/../openssl-1.0.1p/lib -L$MEDIR/../sqlite-autoconf-3080701/lib -L$MEDIR/../zlib-1.2.8/lib -R/system/lib"
+export CFLAGS="$CFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses -I$MEDIR/../bin/openssl-1.0.1p/include -I$MEDIR/../bin/openssl-1.0.1p/include/openssl -I$MEDIR/../bin/sqlite-autoconf-3080701/include -I$MEDIR/../bin/zlib-1.2.8/include -R/system/lib"
+export CXXFLAGS="$CXXFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses -I$MEDIR/../bin/openssl-1.0.1p/include -I$MEDIR/../bin/openssl-1.0.1p/include/openssl -I$MEDIR/../bin/sqlite-autoconf-3080701/include -I$MEDIR/../bin/zlib-1.2.8/include -R/system/lib"
+export LDFLAGS="$LDFLAGS -L$MEDIR/../bin/ncurses-5.9/lib -L$MEDIR/../bin/openssl-1.0.1p/lib -L$MEDIR/../bin/sqlite-autoconf-3080701/lib -L$MEDIR/../bin/zlib-1.2.8/lib -R/system/lib"
 
 # fix ptmx and ptc
 # please investigate your Android in the /dev
