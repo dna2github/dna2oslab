@@ -9,8 +9,9 @@ Lab:
 - compile binaries
     - nginx-1.9.5 (nginx-1.9.5-pie.sh) with [How to use compiled Nginx in APK](https://github.com/dna2github/dna2mtgol/tree/master/fileShare)
     - python-2.7.8
-    - node-v4.1.1
+    - node-v4.4.4
     - node-v6.5.0
+    - node-v7.1.0
 
 > Android &lt;5
 
@@ -38,5 +39,5 @@ Lab:
     - sqlite-autoconf-3080701
     - python-2.7.8 => (pip => django gevent-socketio2 numpy)
     - node-v0.12.6
-    - node-v4.1.1
+    - node-v4.4.4
     - nginx-1.9.5

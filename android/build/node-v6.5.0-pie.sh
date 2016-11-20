@@ -14,7 +14,7 @@ tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out
 
-cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi/lib* out/
+cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/$GCC_VERSION/libs/armeabi/lib* out/
 cp $ANDROID/lib/* out/
 sed -i "s|historyPath = path.join.*|historyPath = '/data/local/tmp/.node_repl_history';|" $MEDIR/../$ME/lib/internal/repl.js
 sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/fs.c
@@ -31,7 +31,8 @@ export CFLAGS_host=$CFLAGS
 
 ./configure --prefix=$MEDIR/../$ME/dist/ --without-snapshot --dest-cpu=arm --dest-os=android --with-intl=none
 sed -i '' "s|LIBS := \\\\|LIBS := -lgnustl_static\\\\|" $MEDIR/../$ME/out/node.target.mk
-sed -i '' "s|include cctest.target.mk|#include cctest.target.mk|" $MEDIR/../$ME/out/Makefile
+# skip cctest; if want, you may need to add -lgnustl_static to cctest.target.mk
+sed -i '' "s|include cctest.target.mk|#include cctest.target.mk|" $MEDIR/../$ME/out/Makefile # skip cctest
 
 make
 make_install $ME

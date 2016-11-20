@@ -26,7 +26,7 @@ tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out
 
-cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi/lib* out/
+cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/$GCC_VERSION/libs/armeabi/lib* out/
 cp $ANDROID/lib/* out/
 sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/fs.c
 sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/stream.c

@@ -13,7 +13,7 @@ tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out
 
-cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi/lib* out/
+cp $NDKDIR/sources/cxx-stl/gnu-libstdc++/$GCC_VERSION/libs/armeabi/lib* out/
 cp $ANDROID/lib/* out/
 cp $MEDIR/node_deps_uv_src_unix_core.c $MEDIR/../$ME/deps/uv/src/unix/core.c
 
