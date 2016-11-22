@@ -12,6 +12,7 @@ Lab:
     - node-v4.4.4
     - node-v6.5.0
     - node-v7.1.0
+    - vim-8.0
 
 > Android &lt;5
 
@@ -33,7 +34,7 @@ Lab:
     - readline-6.3
 - compile binaries
     - tar-1.27
-    - vim-7.4
+    - vim-7.4 (see also vim-8.0-pie.sh)
     - wget-1.16
     - binutils-2.24
     - sqlite-autoconf-3080701
