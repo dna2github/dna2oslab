@@ -17,7 +17,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
-
+fetch_source $ME.tgz https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz
 tar zxf $SRCTARBALL/$ME.tgz
 cd $ME
 mkdir -p dist

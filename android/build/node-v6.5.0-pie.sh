@@ -10,6 +10,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
+fetch_source $SRCTARBALL/$ME.tar.gz https://nodejs.org/dist/v6.5.0/node-v6.5.0.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out

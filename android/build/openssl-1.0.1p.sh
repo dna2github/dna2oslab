@@ -9,6 +9,7 @@ cd $MEDIR
 source common.sh
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz https://www.openssl.org/source/openssl-1.0.1p.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

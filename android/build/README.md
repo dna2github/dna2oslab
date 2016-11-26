@@ -42,3 +42,9 @@ Lab:
     - node-v0.12.6
     - node-v4.4.4
     - nginx-1.9.5
+
+## How to build
+
+1. download Google Android Native Development Kits (NDK)
+3. edit common.sh
+4. run specific shell script to build binaries

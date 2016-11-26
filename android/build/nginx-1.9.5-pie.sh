@@ -15,6 +15,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz http://nginx.org/download/nginx-1.9.5.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

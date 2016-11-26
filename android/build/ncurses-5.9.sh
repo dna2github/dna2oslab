@@ -12,6 +12,7 @@ export LDFLAGS="$LDFLAGS $CXXLIBPLUS -lsupc++"
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/ncurses/ncurses-5.9.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

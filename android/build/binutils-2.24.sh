@@ -2,6 +2,7 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
+
 ME="binutils-2.24"
 
 cd $MEDIR
@@ -19,6 +20,7 @@ export CFLAGS="-I$MEDIR/../$ME/include $CFLAGS"
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

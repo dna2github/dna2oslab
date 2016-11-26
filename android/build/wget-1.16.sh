@@ -12,6 +12,7 @@ CFLAGS="$CFLAGS -I$MEDIR/../bin/openssl-1.0.1j/include -I$MEDIR/../bin/openssl-1
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/wget/wget-1.16.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

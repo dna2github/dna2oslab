@@ -3,7 +3,6 @@ set -xe
 
 # please compile ncurses
 MEDIR=$(cd `dirname $0`; pwd)
-# https://github.com/vim/vim/archive/v8.0.0095.tar.gz
 ME=vim-8.0.0095
 
 cd $MEDIR
@@ -23,6 +22,7 @@ export ac_cv_small_wchar_t="no"
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz https://github.com/vim/vim/archive/v8.0.0095.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

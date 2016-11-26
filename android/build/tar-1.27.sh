@@ -9,7 +9,8 @@ source common.sh
 
 cd ..
 rm -rf $ME
-tar Jxf $SRCTARBALL/$ME.tar.xz
+fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/tar/tar-1.27.tar.gz
+tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
 

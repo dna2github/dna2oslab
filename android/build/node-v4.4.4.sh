@@ -22,6 +22,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
+fetch_source $SRCTARBALL/$ME.tar.gz https://nodejs.org/dist/v4.4.4/node-v4.4.4.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out

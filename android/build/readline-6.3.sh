@@ -15,6 +15,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/readline/readline-6.3.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist

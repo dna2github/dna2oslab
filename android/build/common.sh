@@ -46,3 +46,9 @@ function make_install() {
   rm -rf $1
 }
 
+function fetch_source() {
+# $1: package file name, e.g. vim-7.4.0001.tar.gz
+# $2: source url
+  test -f "$SRCTARBALL/$1" || curl -k -L -o "$SRCTARBALL/$1" "$2"
+  test -f "$SRCTARBALL/$1" || exit 1
+}

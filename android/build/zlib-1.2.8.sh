@@ -9,6 +9,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
+fetch_source $ME.tar.gz http://zlib.net/zlib-1.2.8.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
