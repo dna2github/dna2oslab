@@ -36,13 +36,13 @@ sed -i "s|LIBS := \\\\|LIBS := -lgnustl_static\\\\|" $MEDIR/../$ME/out/deps/v8/s
 # skip generate bytecode-peephole-table.cc
 # get no difference; diff -Nur bytecode-peephole-table.cc(mkpeephole on mac) bytecode-peephole-table.cc(mkpeephole on android)
 sed -i 's|"$(builddir)/mkpeephole"|echo|' $MEDIR/../$ME/out/deps/v8/src/v8_base.target.mk
-cp $MEDIR/node_v8base_geni_bytecode-peephole-table.cc out/Release/obj.target/v8_base/geni/bytecode-peephole-table.cc
+cp $MEDIR/node/v8base_geni_bytecode-peephole-table.cc out/Release/obj.target/v8_base/geni/bytecode-peephole-table.cc
 # skip cctest; if want, you may need to add -lgnustl_static to cctest.target.mk
 sed -i "s|include cctest.target.mk|#include cctest.target.mk|" $MEDIR/../$ME/out/Makefile # skip cctest
 
 make
 # if want generate bytecode-peephole-table.cc manually, pls adb push this binary to your android
-# run `./v8_mkpeephole bytecode-peephole-table.cc; replace node_v8base_geni_bytecode-peephole-table.cc with yours`
+# run `./v8_mkpeephole bytecode-peephole-table.cc; replace node/v8base_geni_bytecode-peephole-table.cc with yours`
 cp out/Release/mkpeephole $MEDIR/../$ME/dist/bin/v8_mkpeephole
 
 make_install $ME
