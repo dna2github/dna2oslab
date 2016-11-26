@@ -6,6 +6,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=vim-8.0.0095
 
 cd $MEDIR
+source env.sh
 source common.sh
 export CFLAGS="$CFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses"
 export CXXFLAGS="$CXXFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses"

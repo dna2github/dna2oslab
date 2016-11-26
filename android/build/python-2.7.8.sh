@@ -12,6 +12,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=Python-2.7.8
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..

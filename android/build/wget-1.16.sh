@@ -6,6 +6,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=wget-1.16
 
 cd $MEDIR
+source env.sh
 source common.sh
 LDFLAGS="$LDFLAGS -L$MEDIR/../bin/openssl-1.0.1j/lib"
 CFLAGS="$CFLAGS -I$MEDIR/../bin/openssl-1.0.1j/include -I$MEDIR/../bin/openssl-1.0.1j/include/openssl -L$MEDIR/../bin/openssl-1.0.1j/lib"

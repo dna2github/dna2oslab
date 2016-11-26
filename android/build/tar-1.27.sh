@@ -5,6 +5,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=tar-1.27
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..

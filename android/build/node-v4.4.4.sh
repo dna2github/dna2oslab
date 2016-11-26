@@ -18,6 +18,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=node-v4.4.4
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..

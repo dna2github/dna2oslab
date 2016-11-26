@@ -1,7 +1,7 @@
-#define NGX_CONFIGURE " --with-http_v2_module --with-http_ssl_module --with-http_realip_module --with-ipv6 --with-http_stub_status_module --with-http_secure_link_module --with-http_random_index_module --with-http_auth_request_module --with-stream --with-stream_ssl_module --with-mail --with-mail_ssl_module"
+#define NGX_CONFIGURE " --prefix=/root/nginx-1.10.2/dist/ --crossbuild=android:arm-eabi --with-cc=gcc --with-cpp=cpp --without-http_rewrite_module --with-stream --with-mail --http-scgi-temp-path=./scgi_temp --http-uwsgi-temp-path=./uwsgi_temp --http-fastcgi-temp-path=./fastcgi_temp --http-proxy-temp-path=./proxy_temp --http-client-body-temp-path=./client_body_temp --http-log-path=./logs --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_slice_module --with-http_realip_module --with-http_v2_module --with-threads --with-select_module --with-poll_module --sbin-path=./sbin --conf-path=./conf --error-log-path=./logs --pid-path=./run --lock-path=./run --with-http_ssl_module --with-stream_ssl_module --with-mail_ssl_module --with-openssl=/root/nginx-1.10.2/deps/openssl-1.0.1p --with-pcre=/root/nginx-1.10.2/deps/pcre-8.37 --with-zlib=/root/nginx-1.10.2/deps/zlib-1.2.8"
 
 #ifndef NGX_COMPILER
-#define NGX_COMPILER  "arm-linux-androideabi-gcc (GCC)"
+#define NGX_COMPILER  "Google Native Development Kits - gcc"
 #endif
 
 
@@ -20,43 +20,13 @@
 #endif
 
 
-#ifndef NGX_HAVE_EPOLL
-#define NGX_HAVE_EPOLL  1
+#ifndef NGX_HAVE_GCC_BSWAP64
+#define NGX_HAVE_GCC_BSWAP64  1
 #endif
 
 
-#ifndef NGX_HAVE_CLEAR_EVENT
-#define NGX_HAVE_CLEAR_EVENT  1
-#endif
-
-
-#ifndef NGX_HAVE_O_PATH
-#define NGX_HAVE_O_PATH  1
-#endif
-
-
-#ifndef NGX_HAVE_SENDFILE
-#define NGX_HAVE_SENDFILE  1
-#endif
-
-
-#ifndef NGX_HAVE_SENDFILE64
-#define NGX_HAVE_SENDFILE64  1
-#endif
-
-
-#ifndef NGX_HAVE_PR_SET_DUMPABLE
-#define NGX_HAVE_PR_SET_DUMPABLE  1
-#endif
-
-
-#ifndef NGX_HAVE_GNU_CRYPT_R
-#define NGX_HAVE_GNU_CRYPT_R  1
-#endif
-
-
-#ifndef NGX_HAVE_NONALIGNED
-#define NGX_HAVE_NONALIGNED  1
+#ifndef NGX_ALIGNMENT
+#define NGX_ALIGNMENT  16
 #endif
 
 
@@ -68,18 +38,8 @@
 #define NGX_KQUEUE_UDATA_T  (void *)
 
 
-#ifndef NGX_HAVE_O_DIRECT
-#define NGX_HAVE_O_DIRECT  1
-#endif
-
-
-#ifndef NGX_HAVE_ALIGNED_DIRECTIO
-#define NGX_HAVE_ALIGNED_DIRECTIO  1
-#endif
-
-
-#ifndef NGX_HAVE_STATFS
-#define NGX_HAVE_STATFS  1
+#ifndef NGX_HAVE_POSIX_FADVISE
+#define NGX_HAVE_POSIX_FADVISE  1
 #endif
 
 
@@ -98,6 +58,16 @@
 #endif
 
 
+#ifndef NGX_HAVE_IP_PKTINFO
+#define NGX_HAVE_IP_PKTINFO  1
+#endif
+
+
+#ifndef NGX_HAVE_IPV6_RECVPKTINFO
+#define NGX_HAVE_IPV6_RECVPKTINFO  1
+#endif
+
+
 #ifndef NGX_HAVE_DEFERRED_ACCEPT
 #define NGX_HAVE_DEFERRED_ACCEPT  1
 #endif
@@ -110,6 +80,11 @@
 
 #ifndef NGX_HAVE_TCP_INFO
 #define NGX_HAVE_TCP_INFO  1
+#endif
+
+
+#ifndef NGX_HAVE_ACCEPT4
+#define NGX_HAVE_ACCEPT4  1
 #endif
 
 
@@ -144,42 +119,37 @@
 
 
 #ifndef NGX_MAX_SIZE_T_VALUE
-#define NGX_MAX_SIZE_T_VALUE  9223372036854775807LL
+#define NGX_MAX_SIZE_T_VALUE  2147483647L
 #endif
 
 
 #ifndef NGX_SIZE_T_LEN
-#define NGX_SIZE_T_LEN  (sizeof("-9223372036854775808") - 1)
+#define NGX_SIZE_T_LEN  (sizeof("-2147483648") - 1)
 #endif
 
 
 #ifndef NGX_MAX_OFF_T_VALUE
-#define NGX_MAX_OFF_T_VALUE  9223372036854775807LL
+#define NGX_MAX_OFF_T_VALUE  2147483647L
 #endif
 
 
 #ifndef NGX_OFF_T_LEN
-#define NGX_OFF_T_LEN  (sizeof("-9223372036854775808") - 1)
+#define NGX_OFF_T_LEN  (sizeof("-2147483648") - 1)
 #endif
 
 
 #ifndef NGX_TIME_T_SIZE
-#define NGX_TIME_T_SIZE  4
+#define NGX_TIME_T_SIZE  8
 #endif
 
 
 #ifndef NGX_TIME_T_LEN
-#define NGX_TIME_T_LEN  (sizeof("-9223372036854775808") - 1)
+#define NGX_TIME_T_LEN  (sizeof("-2147483648") - 1)
 #endif
 
 
 #ifndef NGX_MAX_TIME_T_VALUE
-#define NGX_MAX_TIME_T_VALUE  9223372036854775807LL
-#endif
-
-
-#ifndef NGX_HAVE_INET6
-#define NGX_HAVE_INET6  1
+#define NGX_MAX_TIME_T_VALUE  2147483647L
 #endif
 
 
@@ -228,11 +198,6 @@
 #endif
 
 
-#ifndef NGX_HAVE_POSIX_SEM
-#define NGX_HAVE_POSIX_SEM  1
-#endif
-
-
 #ifndef NGX_HAVE_MSGHDR_MSG_CONTROL
 #define NGX_HAVE_MSGHDR_MSG_CONTROL  1
 #endif
@@ -268,6 +233,21 @@
 #endif
 
 
+#ifndef NGX_THREADS
+#define NGX_THREADS  1
+#endif
+
+
+#ifndef NGX_HAVE_SELECT
+#define NGX_HAVE_SELECT  1
+#endif
+
+
+//#ifndef NGX_HAVE_POLL
+//#define NGX_HAVE_POLL  1
+//#endif
+
+
 #ifndef NGX_HTTP_CACHE
 #define NGX_HTTP_CACHE  1
 #endif
@@ -283,8 +263,23 @@
 #endif
 
 
+#ifndef NGX_HTTP_GZIP
+#define NGX_HTTP_GZIP  1
+#endif
+
+
 #ifndef NGX_HTTP_V2
 #define NGX_HTTP_V2  1
+#endif
+
+
+#ifndef NGX_HTTP_GZIP
+#define NGX_HTTP_GZIP  1
+#endif
+
+
+#ifndef NGX_CRYPT
+#define NGX_CRYPT  1
 #endif
 
 
@@ -313,18 +308,8 @@
 #endif
 
 
-#ifndef NGX_HTTP_DEGRADATION
-#define NGX_HTTP_DEGRADATION  1
-#endif
-
-
 #ifndef NGX_HTTP_UPSTREAM_ZONE
 #define NGX_HTTP_UPSTREAM_ZONE  1
-#endif
-
-
-#ifndef NGX_STAT_STUB
-#define NGX_STAT_STUB  1
 #endif
 
 
@@ -335,11 +320,6 @@
 
 #ifndef NGX_STREAM_SSL
 #define NGX_STREAM_SSL  1
-#endif
-
-
-#ifndef NGX_STREAM
-#define NGX_STREAM  1
 #endif
 
 
@@ -414,12 +394,12 @@
 
 
 #ifndef NGX_PID_PATH
-#define NGX_PID_PATH  "logs/nginx.pid"
+#define NGX_PID_PATH  ".pid"
 #endif
 
 
 #ifndef NGX_LOCK_PATH
-#define NGX_LOCK_PATH  "logs/nginx.lock"
+#define NGX_LOCK_PATH  ".lock"
 #endif
 
 
@@ -476,4 +456,3 @@
 #ifndef NGX_GROUP
 #define NGX_GROUP  "shell"
 #endif
-

@@ -6,6 +6,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME="binutils-2.24"
 
 cd $MEDIR
+source env.sh
 source common.sh
 export AR="$COMPILER/arm-linux-androideabi-ar"
 export AS="$COMPILER/arm-linux-androideabi-as"

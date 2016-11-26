@@ -11,6 +11,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=readline-6.3
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..

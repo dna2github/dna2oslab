@@ -5,6 +5,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=sqlite-autoconf-3080701
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..

@@ -5,6 +5,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=ncurses-5.9
 
 cd $MEDIR
+source env.sh
 source common.sh
 export CFLAGS="$CFLAGS -fPIC -fexceptions -fno-rtti"
 export CXXFLAGS="$CXXFLAGS -fPIC -fexceptions -fno-rtti"

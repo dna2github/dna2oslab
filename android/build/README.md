@@ -7,7 +7,7 @@ Binary Test Machine:
 
 Lab:
 - compile binaries
-    - nginx-1.9.5 (nginx-1.9.5-pie.sh) with [How to use compiled Nginx in APK](https://github.com/dna2github/dna2mtgol/tree/master/fileShare)
+    - nginx-1.10.2 and [How to use compiled Nginx in APK](https://github.com/dna2github/dna2mtgol/tree/master/fileShare)
     - python-2.7.8
     - node-v4.4.4
     - node-v6.5.0
@@ -41,10 +41,10 @@ Lab:
     - python-2.7.8 => (pip => django gevent-socketio2 numpy)
     - node-v0.12.6
     - node-v4.4.4
-    - nginx-1.9.5
+    - nginx-1.10.2 (see also nginx-1.10.2-pie.sh)
 
 ## How to build
 
 1. download Google Android Native Development Kits (NDK)
-3. edit common.sh
+3. edit env.sh
 4. run specific shell script to build binaries

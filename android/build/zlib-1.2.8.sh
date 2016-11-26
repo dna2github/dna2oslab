@@ -5,6 +5,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=zlib-1.2.8
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..

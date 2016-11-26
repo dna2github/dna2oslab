@@ -5,8 +5,9 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=openssl-1.0.1p
 
 cd $MEDIR
-
+source env.sh
 source common.sh
+
 cd ..
 rm -rf $ME
 fetch_source $ME.tar.gz https://www.openssl.org/source/openssl-1.0.1p.tar.gz

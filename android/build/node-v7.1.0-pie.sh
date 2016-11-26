@@ -6,6 +6,7 @@ MEDIR=$(cd `dirname $0`; pwd)
 ME=node-v7.1.0
 
 cd $MEDIR
+source env.sh
 source common.sh
 
 cd ..
