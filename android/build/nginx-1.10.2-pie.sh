@@ -59,36 +59,36 @@ OPENSSLFLAGS="-I$MEDIR/../bin/$OPENSSL/include -I$MEDIR/../bin/$OPENSSL/include/
 ZLIBFLAGS="-I$MEDIR/../bin/$ZLIB/include -L$MEDIR/../bin/$ZLIB/lib"
 PCREFLAGS="-I$MEDIR/../bin/$PCRE/include -L$MEDIR/../bin/$PCRE/lib"
 
-sed -i '' "s|^CC =.*$|CC = $CC|" objs/Makefile
-sed -i '' "s|^CFLAGS =.*$|CFLAGS = -pipe -O -Wall $CFLAGS $OPENSSLFLAGS $ZLIBFLAGS $PCREFLAGS $LDFLAGS|" objs/Makefile
-sed -i '' "s|^CPP =.*$|CPP = $CPP|" objs/Makefile
-sed -i '' "s|^LINK =.*$|LINK = $CC --sysroot=$ANDROID|" objs/Makefile
-sed -i '' "s|^PREFIX=.*$|PREFIX = $MEDIR/../$ME/dist|" objs/Makefile
-sed -i '' "s|^OPENSSL=.*$|OPENSSL=$OPENSSL|" objs/Makefile
-sed -i '' "s|^ZLIB=.*$|ZLIB=$ZLIB|" objs/Makefile
-sed -i '' "s|^PCRE=.*$|PCRE=$PCRE|" objs/Makefile
-sed -i '' "s|^#include <glob.h>||" src/os/unix/ngx_posix_config.h
-sed -i '' "s|^#include <crypt.h>||" src/os/unix/ngx_posix_config.h
+sed -i "s|^CC =.*$|CC = $CC|" objs/Makefile
+sed -i "s|^CFLAGS =.*$|CFLAGS = -pipe -O -Wall $CFLAGS $OPENSSLFLAGS $ZLIBFLAGS $PCREFLAGS $LDFLAGS|" objs/Makefile
+sed -i "s|^CPP =.*$|CPP = $CPP|" objs/Makefile
+sed -i "s|^LINK =.*$|LINK = $CC --sysroot=$ANDROID|" objs/Makefile
+sed -i "s|^PREFIX=.*$|PREFIX = $MEDIR/../$ME/dist|" objs/Makefile
+sed -i "s|^OPENSSL=.*$|OPENSSL=$OPENSSL|" objs/Makefile
+sed -i "s|^ZLIB=.*$|ZLIB=$ZLIB|" objs/Makefile
+sed -i "s|^PCRE=.*$|PCRE=$PCRE|" objs/Makefile
+sed -i "s|^#include <glob.h>||" src/os/unix/ngx_posix_config.h
+sed -i "s|^#include <crypt.h>||" src/os/unix/ngx_posix_config.h
 # if want more IOV_MAX, default is 16
-#sed -i '' "s|^#define IOV_MAX|64|" src/os/unix/ngx_posix_config.h
-sed -i '' "s|in_port_t|uint16_t|g" src/core/ngx_inet.h
-sed -i '' "s|in_port_t|uint16_t|g" src/core/ngx_inet.c
-sed -i '' "s|in_port_t|uint16_t|g" src/event/ngx_event_openssl_stapling.c
-sed -i '' "s|in_port_t|uint16_t|g" src/http/ngx_http_upstream.h
-sed -i '' "s|in_port_t|uint16_t|g" src/http/ngx_http_core_module.h
-sed -i '' "s|in_port_t|uint16_t|g" src/http/ngx_http.c
-sed -i '' "s|in_port_t|uint16_t|g" src/http/modules/ngx_http_proxy_module.c
-sed -i '' "s|in_port_t|uint16_t|g" src/mail/ngx_mail.h
-sed -i '' "s|in_port_t|uint16_t|g" src/mail/ngx_mail.c
-sed -i '' "s|in_port_t|uint16_t|g" src/mail/ngx_mail_core_module.c
-sed -i '' "s|in_port_t|uint16_t|g" src/mail/ngx_mail_auth_http_module.c
-sed -i '' "s|in_port_t|uint16_t|g" src/stream/ngx_stream_upstream.h
-sed -i '' "s|in_port_t|uint16_t|g" src/stream/ngx_stream.h
-sed -i '' "s|in_port_t|uint16_t|g" src/stream/ngx_stream.c
-sed -i '' "s|in_port_t|uint16_t|g" src/stream/ngx_stream_core_module.c
+#sed -i "s|^#define IOV_MAX|64|" src/os/unix/ngx_posix_config.h
+sed -i "s|in_port_t|uint16_t|g" src/core/ngx_inet.h
+sed -i "s|in_port_t|uint16_t|g" src/core/ngx_inet.c
+sed -i "s|in_port_t|uint16_t|g" src/event/ngx_event_openssl_stapling.c
+sed -i "s|in_port_t|uint16_t|g" src/http/ngx_http_upstream.h
+sed -i "s|in_port_t|uint16_t|g" src/http/ngx_http_core_module.h
+sed -i "s|in_port_t|uint16_t|g" src/http/ngx_http.c
+sed -i "s|in_port_t|uint16_t|g" src/http/modules/ngx_http_proxy_module.c
+sed -i "s|in_port_t|uint16_t|g" src/mail/ngx_mail.h
+sed -i "s|in_port_t|uint16_t|g" src/mail/ngx_mail.c
+sed -i "s|in_port_t|uint16_t|g" src/mail/ngx_mail_core_module.c
+sed -i "s|in_port_t|uint16_t|g" src/mail/ngx_mail_auth_http_module.c
+sed -i "s|in_port_t|uint16_t|g" src/stream/ngx_stream_upstream.h
+sed -i "s|in_port_t|uint16_t|g" src/stream/ngx_stream.h
+sed -i "s|in_port_t|uint16_t|g" src/stream/ngx_stream.c
+sed -i "s|in_port_t|uint16_t|g" src/stream/ngx_stream_core_module.c
 
 # disable glob, no fuzzy file name in conf file like "hello*"
-sed -i '' "s| glob_t | ngx_str_t * |" src/os/unix/ngx_files.h
+sed -i "s| glob_t | ngx_str_t * |" src/os/unix/ngx_files.h
 sed -n '1,702p' src/os/unix/ngx_files.c > src/os/unix/ngx_files.c.fix
 echo 'ngx_int_t ngx_open_glob(ngx_glob_t *gl) { return NGX_OK;}' >> src/os/unix/ngx_files.c.fix
 echo 'ngx_int_t ngx_read_glob(ngx_glob_t *gl, ngx_str_t *name) { gl->pglob = name; return NGX_OK;}' >> src/os/unix/ngx_files.c.fix
