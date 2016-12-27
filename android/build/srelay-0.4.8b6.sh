@@ -16,7 +16,7 @@ cd $ME
 mkdir -p dist
 
 sed -i "s|.*strcmp.*|{|g" auth-pwd.c # disable auth
-CONFIG="-DLINUX -DHAVE_LIMITS_H -DHAVE_SOCKLEN_T -DHAVE_U_INT8_T -DHAVE_U_INT16_T -DHAVE_U_INT32_T --sysroot=$ANDROID"
+CONFIG="-DLINUX -DUSE_THREAD -DHAVE_SYS_RESOURCE_H -DHAVE_LIMITS_H -DHAVE_SOCKLEN_T -DHAVE_U_INT8_T -DHAVE_U_INT16_T -DHAVE_U_INT32_T --sysroot=$ANDROID"
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c init.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c readconf.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c util.c
@@ -25,7 +25,7 @@ $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c relay.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c main.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c auth-pwd.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c get-bind.c
-$CC -I. -I$ANDROID/include $CONFIG -L$ANDROID/lib init.o readconf.o util.o socks.o relay.o main.o auth-pwd.o get-bind.o  -o srelay
+$CC -I. -I$ANDROID/include $CONFIG -L$ANDROID/lib init.o readconf.o util.o socks.o relay.o main.o auth-pwd.o get-bind.o -o srelay
 
 mkdir -p $MEDIR/../bin/$ME/{bin,share}
 cp srelay $MEDIR/../bin/$ME/bin/

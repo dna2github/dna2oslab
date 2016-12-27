@@ -42,6 +42,8 @@ Lab:
     - node-v0.12.6
     - node-v4.4.4
     - nginx-1.10.2 (see also nginx-1.10.2-pie.sh)
+    - haproxy 1.7.1
+    - srelay 0.4.8b6
 
 ## How to build
 
