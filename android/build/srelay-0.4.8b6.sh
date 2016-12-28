@@ -16,7 +16,7 @@ cd $ME
 mkdir -p dist
 
 sed -i "s|.*strcmp.*|{|g" auth-pwd.c # disable auth
-CONFIG="-DLINUX -DUSE_THREAD -DHAVE_SYS_RESOURCE_H -DHAVE_LIMITS_H -DHAVE_SOCKLEN_T -DHAVE_U_INT8_T -DHAVE_U_INT16_T -DHAVE_U_INT32_T --sysroot=$ANDROID"
+CONFIG="-DLINUX -DUSE_THREAD -DHAVE_SYS_RESOURCE_H -DHAVE_LIMITS_H -DHAVE_SOCKLEN_T -DHAVE_U_INT8_T -DHAVE_U_INT16_T -DHAVE_U_INT32_T --sysroot=$ANDROID $PIEFLAG"
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c init.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c readconf.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c util.c

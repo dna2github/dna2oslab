@@ -60,9 +60,9 @@ ZLIBFLAGS="-I$MEDIR/../bin/$ZLIB/include -L$MEDIR/../bin/$ZLIB/lib"
 PCREFLAGS="-I$MEDIR/../bin/$PCRE/include -L$MEDIR/../bin/$PCRE/lib"
 
 sed -i "s|^CC =.*$|CC = $CC|" objs/Makefile
-sed -i "s|^CFLAGS =.*$|CFLAGS = -pipe -O -Wall $CFLAGS $OPENSSLFLAGS $ZLIBFLAGS $PCREFLAGS $LDFLAGS|" objs/Makefile
+sed -i "s|^CFLAGS =.*$|CFLAGS = -pipe -O -Wall $CFLAGS $OPENSSLFLAGS $ZLIBFLAGS $PCREFLAGS $LDFLAGS $PIEFLAG|" objs/Makefile
 sed -i "s|^CPP =.*$|CPP = $CPP|" objs/Makefile
-sed -i "s|^LINK =.*$|LINK = $CC --sysroot=$ANDROID|" objs/Makefile
+sed -i "s|^LINK =.*$|LINK = $CC $PIEFLAG --sysroot=$ANDROID|" objs/Makefile
 sed -i "s|^PREFIX=.*$|PREFIX = $MEDIR/../$ME/dist|" objs/Makefile
 sed -i "s|^OPENSSL=.*$|OPENSSL=$OPENSSL|" objs/Makefile
 sed -i "s|^ZLIB=.*$|ZLIB=$ZLIB|" objs/Makefile

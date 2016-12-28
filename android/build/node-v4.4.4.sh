@@ -23,9 +23,9 @@ sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/fs.c
 sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/stream.c
 sed -i "s/path.join(os.homedir(), '.node_repl_history');/'\/data\/local\/tmp\/.node_repl_history';/" $MEDIR/../$ME/lib/internal/repl.js
 
-export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS"
-export CXXFLAGS="$CXXFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS -lgnustl_shared -lgnustl_static -lsupc++"
-export LDFLAGS="$LDFLAGS $CXXLIBPLUS -lgnustl_shared -lgnustl_static -lsupc++"
+export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS $PIEFLAG"
+export CXXFLAGS="$CXXFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS -lgnustl_shared -lgnustl_static -lsupc++ $PIEFLAG"
+export LDFLAGS="$LDFLAGS $CXXLIBPLUS -lgnustl_shared -lgnustl_static -lsupc++ $PIEFLAG"
 
 ./configure --prefix=$MEDIR/../$ME/dist/ --without-snapshot --dest-cpu=arm --dest-os=android
 

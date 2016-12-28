@@ -8,9 +8,9 @@ ME=vim-8.0.0095
 cd $MEDIR
 source env.sh
 source common.sh
-export CFLAGS="$CFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses"
-export CXXFLAGS="$CXXFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses"
-export LDFLAGS="$LDFLAGS -L$MEDIR/../bin/ncurses-5.9/lib -rdynamic -fPIE -pie"
+export CFLAGS="$CFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses $PIEFLAG"
+export CXXFLAGS="$CXXFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses $PIEFLAG"
+export LDFLAGS="$LDFLAGS -L$MEDIR/../bin/ncurses-5.9/lib -rdynamic $PIEFLAG"
 export vim_cv_toupper_broken="set"
 export vim_cv_getcwd_broken="yes"
 export vim_cv_stat_ignores_slash="yes"

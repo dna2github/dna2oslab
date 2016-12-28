@@ -24,9 +24,9 @@ sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/stream.c
 sed -i "s/UV__POLLIN/1/g" $MEDIR/../$ME/deps/uv/src/unix/core.c
 sed -i "s/UV__POLLOUT/4/g" $MEDIR/../$ME/deps/uv/src/unix/core.c
 
-export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS"
-export CXXFLAGS="$CXXFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS"
-export LDFLAGS="$LDFLAGS $CXXLIBPLUS"
+export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS $PIEFLAG"
+export CXXFLAGS="$CXXFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS $PIEFLAG"
+export LDFLAGS="$LDFLAGS $CXXLIBPLUS $PIEFLAG"
 export CPPFLAGS_host=$CXXFLAGS
 export CPPFLAGS=$CXXFLAGS
 export CFLAGS_host=$CFLAGS

@@ -8,6 +8,7 @@ echo "===================================================================="
 set -xe
 
 # please compile openssl zlib ncurses sqlite first
+# if wanna support command line history, compile readline
 MEDIR=$(cd `dirname $0`; pwd)
 ME=Python-2.7.8
 
@@ -22,9 +23,11 @@ tar zxf $SRCTARBALL/$ME.tgz
 cd $ME
 mkdir -p dist
 
-export CFLAGS="$CFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses -I$MEDIR/../bin/openssl-1.0.1p/include -I$MEDIR/../bin/openssl-1.0.1p/include/openssl -I$MEDIR/../bin/sqlite-autoconf-3080701/include -I$MEDIR/../bin/zlib-1.2.8/include -R/system/lib"
-export CXXFLAGS="$CXXFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses -I$MEDIR/../bin/openssl-1.0.1p/include -I$MEDIR/../bin/openssl-1.0.1p/include/openssl -I$MEDIR/../bin/sqlite-autoconf-3080701/include -I$MEDIR/../bin/zlib-1.2.8/include -R/system/lib"
-export LDFLAGS="$LDFLAGS -L$MEDIR/../bin/ncurses-5.9/lib -L$MEDIR/../bin/openssl-1.0.1p/lib -L$MEDIR/../bin/sqlite-autoconf-3080701/lib -L$MEDIR/../bin/zlib-1.2.8/lib -R/system/lib"
+LIB_INCLUDE="-I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses -I$MEDIR/../bin/openssl-1.0.1p/include -I$MEDIR/../bin/openssl-1.0.1p/include/openssl -I$MEDIR/../bin/sqlite-autoconf-3090200/include -I$MEDIR/../bin/zlib-1.2.8/include"
+LIB_LIB="-L$MEDIR/../bin/ncurses-5.9/lib -L$MEDIR/../bin/openssl-1.0.1p/lib -L$MEDIR/../bin/sqlite-autoconf-3090200/lib -L$MEDIR/../bin/zlib-1.2.8/lib"
+export CFLAGS="$CFLAGS $LIB_INCLUDE -R/system/lib -fvisibility=default $PIEFLAG"
+export CXXFLAGS="$CXXFLAGS $LIB_INCLUDE -R/system/lib -fvisibility=default $PIEFLAG"
+export LDFLAGS="$LDFLAGS $LIB_LIB -R/system/lib $PIEFLAG"
 
 # fix ptmx and ptc
 # please investigate your Android in the /dev
@@ -58,7 +61,7 @@ cp $MEDIR/python/socketmodule.c Modules/
 # some files; however, with cross-compiling eanbled, pgen will be built
 # to the target binary not host binary, so that it cannot be executed
 sed -i "s|\$(PGEN):.*|\$(PGEN):|" Makefile
-sed -i "s|\$(CC) \$(OPT) \$(LDFLAGS) \$(PGENOBJS) \$(LIBS) -o \$(PGEN)|gcc -pthread -DNDEBUG -fwrapv -O3 -Wall -Wstrict-prototypes  Parser/acceler.c Parser/grammar1.c Parser/listnode.c Parser/node.c Parser/parser.c Parser/parsetok.c Parser/bitset.c Parser/metagrammar.c Parser/firstsets.c Parser/grammar.c Parser/pgen.c Objects/obmalloc.c Python/mysnprintf.c Python/pyctype.c Parser/tokenizer_pgen.c Parser/printgrammar.c Parser/pgenmain.c -lpthread -ldl -lutil -I. -IInclude -o Parser/pgen|" Makefile
+sed -i "s|\$(CC) \$(OPT) \$(LDFLAGS) \$(PGENOBJS) \$(LIBS) -o \$(PGEN)|gcc -pthread -DNDEBUG -fwrapv -O3 -Wall -Wstrict-prototypes  Parser/acceler.c Parser/grammar1.c Parser/listnode.c Parser/node.c Parser/parser.c Parser/parsetok.c Parser/bitset.c Parser/metagrammar.c Parser/firstsets.c Parser/grammar.c Parser/pgen.c Objects/obmalloc.c Python/mysnprintf.c Python/pyctype.c Parser/tokenizer_pgen.c Parser/printgrammar.c Parser/pgenmain.c -lpthread -ldl -framework CoreFoundation -I. -IInclude -o Parser/pgen|" Makefile
 
 cp $ANDROID/lib/*.o ./
 mkdir -p build/temp.linux2-arm-2.7/libffi

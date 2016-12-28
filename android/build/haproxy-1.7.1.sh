@@ -19,5 +19,5 @@ mkdir -p dist
 sed -i "s|^PREFIX = .*$|PREFIX = $MEDIR/../$ME/dist|" Makefile
 grep sys/select.h include/common/config.h || echo "#include <sys/select.h>" >> include/common/config.h
 cat $MEDIR/haproxy/config.h >> $MEDIR/../$ME/include/common/config.h
-make TARGET=generic PREFIX=$MEDIR/../$ME/dist CC="$CC --sysroot=$ANDROID -I$ANDROID/include -L$ANDROID/lib"
+make TARGET=generic PREFIX=$MEDIR/../$ME/dist CC="$CC --sysroot=$ANDROID -I$ANDROID/include -L$ANDROID/lib $PIEFLAG"
 make_install $ME
