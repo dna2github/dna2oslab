@@ -28,6 +28,6 @@ export CONFIGFLAGS="--build=x86_64-linux --host=arm-eabi --target=arm-eabi --wit
 
 
 export PIEFLAG=""
-if [ "$ANDROID_VERSION" -gt 22]; then
+if [ "$ANDROID_VERSION" -gt 22 ]; then
   export PIEFLAG="-fPIE -pie"
 fi
