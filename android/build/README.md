@@ -13,6 +13,9 @@ Lab:
     - node-v6.5.0
     - node-v7.1.0
     - vim-8.0
+    - haproxy 1.7.1
+    - srelay 0.4.8b6
+    - iprelay 1.1
 
 > Android &lt;5
 
@@ -42,8 +45,6 @@ Lab:
     - node-v0.12.6
     - node-v4.4.4
     - nginx-1.10.2 (see also nginx-1.10.2-pie.sh)
-    - haproxy 1.7.1
-    - srelay 0.4.8b6
 
 ## How to build
 
