@@ -8,7 +8,7 @@ Binary Test Machine:
 Lab:
 - compile binaries
     - nginx-1.10.2 and [How to use compiled Nginx in APK](https://github.com/dna2github/dna2mtgol/tree/master/fileShare)
-    - python-2.7.8
+    - python-2.7.13
     - node-v4.4.4
     - node-v6.5.0
     - node-v7.1.0
@@ -41,7 +41,7 @@ Lab:
     - wget-1.16
     - binutils-2.24
     - sqlite-autoconf-3080701
-    - python-2.7.8 => (pip => django gevent-socketio2 numpy)
+    - python-2.7.13 => (pip => django gevent-socketio2 numpy)
     - node-v0.12.6
     - node-v4.4.4
     - nginx-1.10.2 (see also nginx-1.10.2-pie.sh)
