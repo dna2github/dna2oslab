@@ -1,6 +1,6 @@
 #/bin/bash
 
-export COMPILER="$NDKDIR/toolchains/arm-linux-androideabi-${GCC_VERSION}/prebuilt/linux-x86_64/bin"
+export COMPILER="$NDKDIR/toolchains/arm-linux-androideabi-${GCC_VERSION}/prebuilt/${BUILD_MACHINE}/bin"
 export CC="$COMPILER/arm-linux-androideabi-gcc"
 export CXX="$COMPILER/arm-linux-androideabi-g++"
 export CPP="$COMPILER/arm-linux-androideabi-cpp"
