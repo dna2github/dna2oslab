@@ -1,4 +1,16 @@
-Android Platform Lab
+# Android Platform Lab
+
+## How to build
+
+1. download Google Android Native Development Kits (NDK)
+3. edit env.sh
+4. run specific shell script to build binaries
+
+## How to use binary file in Android application
+
+- examples:
+   - [FileShare (run Nginx)](https://github.com/dna2github/dna2mtgol/blob/master/fileShare)
+   - [Shadowsocks Proxy (run ss-local, tun2socks, ...)](https://github.com/shadowsocks/shadowsocks-android)
 
 > Android 6 only supports binaries with PIE enabled
 
@@ -45,9 +57,3 @@ Lab:
     - node-v0.12.6
     - node-v4.4.4
     - nginx-1.10.2 (see also nginx-1.10.2-pie.sh)
-
-## How to build
-
-1. download Google Android Native Development Kits (NDK)
-3. edit env.sh
-4. run specific shell script to build binaries

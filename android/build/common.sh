@@ -16,18 +16,17 @@ export STRINGS="$COMPILER/arm-linux-androideabi-strings"
 export READELF="$COMPILER/arm-linux-androideabi-readelf"
 
 export ANDROID="$NDKDIR/platforms/android-${ANDROID_VERSION}/arch-arm/usr"
-export CFLAGS="-I$ANDROID/include --sysroot=$ANDROID"
-export CXXFLAGS="-I$ANDROID/include --sysroot=$ANDROID"
-export CPPFLAGS="-I$ANDROID/include"
-export LDFLAGS="-L$ANDROID/lib"
+export PIEFLAG=""
+if [ "$ANDROID_VERSION" -gt 22 ]; then
+  export PIEFLAG="-fPIE -pie"
+fi
+export CFLAGS="--sysroot=$ANDROID -I$ANDROID/include $PIEFLAG"
+export CXXFLAGS="$CLFAGS"
+export CPPFLAGS="$CFLAGS"
+export LDFLAGS="--sysroot=$ANDROID -L$ANDROID/lib $PIEFLAG"
 
 export CXXPLUS="$NDKDIR/sources/cxx-stl/gnu-libstdc++/${GCC_VERSION}"
 export CXXCONFIGFLAGS="-I$CXXPLUS/include -I$CXXPLUS/libs/armeabi/include"
 export CXXLIBPLUS="-L$CXXPLUS/libs/armeabi"
 export CONFIGFLAGS="--build=x86_64-linux --host=arm-eabi --target=arm-eabi --with-sysroot=$ANDROID"
 
-
-export PIEFLAG=""
-if [ "$ANDROID_VERSION" -gt 22 ]; then
-  export PIEFLAG="-fPIE -pie"
-fi

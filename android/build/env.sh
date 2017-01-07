@@ -1,6 +1,6 @@
 #/bin/bash
 
-echo "Please configure this common.sh ..."
+echo "Please configure this env.sh ..."
 echo "  SRCTARBALL, NDKDIR, BUILD_MACHINE, ANDROID_VERSION, GCC_VERSION"
 exit 1
 # Then remove above echo and exit
@@ -14,9 +14,9 @@ export NDKDIR="{----- Google Android NDK path -----}"
 
 # example:
 # export ANDROID_VERSION="23" # android 6.0
-# export BUILD_MACHINE="darwin-x86_64" # build on macosx; for linux, usually "linux-x86_64"; not try on windows
+# export BUILD_MACHINE="darwin-x86_64" # build on macosx; for linux, usually "linux-x86_64"; not yet try on windows
 # export GCC_VERSION="4.9"
-# export SRCTARBALL="/opt/source"
+# export SRCTARBALL="/opt"
 # export NDKDIR="/toolchain/android-ndk"
 
 function make_install() {
