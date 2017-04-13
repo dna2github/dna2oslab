@@ -27,8 +27,8 @@ $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c auth-pwd.c
 $CC -I. -I$ANDROID/include $CONFIG -DSYSCONFDIR=\"./\" -O2 -Wall -c get-bind.c
 $CC -I. -I$ANDROID/include $CONFIG -L$ANDROID/lib init.o readconf.o util.o socks.o relay.o main.o auth-pwd.o get-bind.o -o srelay
 
-mkdir -p $MEDIR/../bin/$ME/{bin,share}
-cp srelay $MEDIR/../bin/$ME/bin/
-cp srelay.conf $MEDIR/../bin/$ME/share/
+mkdir -p $MEDIR/../$DISTBIN/$ME/{bin,share}
+cp srelay $MEDIR/../$DISTBIN/$ME/$DISTBIN/
+cp srelay.conf $MEDIR/../$DISTBIN/$ME/share/
 cd ..
 rm -rf $ME

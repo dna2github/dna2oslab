@@ -55,9 +55,9 @@ mkdir -p objs/src/os/unix
 OPENSSL=openssl-1.0.1p
 ZLIB=zlib-1.2.8
 PCRE=pcre-8.37
-OPENSSLFLAGS="-I$MEDIR/../bin/$OPENSSL/include -I$MEDIR/../bin/$OPENSSL/include/openssl -L$MEDIR/../bin/$OPENSSL/lib"
-ZLIBFLAGS="-I$MEDIR/../bin/$ZLIB/include -L$MEDIR/../bin/$ZLIB/lib"
-PCREFLAGS="-I$MEDIR/../bin/$PCRE/include -L$MEDIR/../bin/$PCRE/lib"
+OPENSSLFLAGS="-I$MEDIR/../$DISTBIN/$OPENSSL/include -I$MEDIR/../$DISTBIN/$OPENSSL/include/openssl -L$MEDIR/../$DISTBIN/$OPENSSL/lib"
+ZLIBFLAGS="-I$MEDIR/../$DISTBIN/$ZLIB/include -L$MEDIR/../$DISTBIN/$ZLIB/lib"
+PCREFLAGS="-I$MEDIR/../$DISTBIN/$PCRE/include -L$MEDIR/../$DISTBIN/$PCRE/lib"
 
 sed -i "s|^CC =.*$|CC = $CC|" objs/Makefile
 sed -i "s|^CFLAGS =.*$|CFLAGS = -pipe -O -Wall $CFLAGS $OPENSSLFLAGS $ZLIBFLAGS $PCREFLAGS $LDFLAGS $PIEFLAG|" objs/Makefile
@@ -108,8 +108,8 @@ mv src/os/unix/ngx_user.c.fix src/os/unix/ngx_user.c
 
 make -f objs/Makefile
 make -f objs/Makefile install
-rm -rf ../bin/$ME
-mv dist ../bin/$ME
+rm -rf ../$DISTBIN/$ME
+mv dist ../$DISTBIN/$ME
 cd ..
 rm -rf $ME
 

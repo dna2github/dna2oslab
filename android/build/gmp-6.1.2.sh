@@ -2,7 +2,7 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=tar-1.27
+ME=gmp-6.1.2
 
 cd $MEDIR
 source env.sh
@@ -10,16 +10,12 @@ source common.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/tar/tar-1.27.tar.gz
-tar zxf $SRCTARBALL/$ME.tar.gz
+fetch_source $ME.tar.bz2 http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2
+tar jxf $SRCTARBALL/$ME.tar.bz2
 cd $ME
 mkdir -p dist
 
-sed -i "s/^mkfifo/_mkfifo/" gnu/mkfifo.c
-
 ./configure $CONFIGFLAGS --prefix=$MEDIR/../$ME/dist/
-
-sed -i "s/.*FCNTL_DUPFD_BUGGY.*//" config.h
 
 make
 make_install $ME

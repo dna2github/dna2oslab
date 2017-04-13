@@ -29,8 +29,8 @@ tar zxf $SRCTARBALL/$ME.tgz
 cd $ME
 mkdir -p dist
 
-LIB_INCLUDE="-I$MEDIR/../bin/$NCURSES/include -I$MEDIR/../bin/$NCURSES/include/ncurses -I$MEDIR/../bin/$OPENSSL/include -I$MEDIR/../bin/$OPENSSL/include/openssl -I$MEDIR/../bin/$SQLITE/include -I$MEDIR/../bin/$ZLIB/include -I. -I$ANDROID/include"
-LIB_LIB="-L$MEDIR/../bin/$NCURSES/lib -L$MEDIR/../bin/$OPENSSL/lib -L$MEDIR/../bin/$SQLITE/lib -L$MEDIR/../bin/$ZLIB/lib -L. -L$ANDROID/lib"
+LIB_INCLUDE="-I$MEDIR/../$DISTBIN/$NCURSES/include -I$MEDIR/../$DISTBIN/$NCURSES/include/ncurses -I$MEDIR/../$DISTBIN/$OPENSSL/include -I$MEDIR/../$DISTBIN/$OPENSSL/include/openssl -I$MEDIR/../$DISTBIN/$SQLITE/include -I$MEDIR/../$DISTBIN/$ZLIB/include -I. -I$ANDROID/include"
+LIB_LIB="-L$MEDIR/../$DISTBIN/$NCURSES/lib -L$MEDIR/../$DISTBIN/$OPENSSL/lib -L$MEDIR/../$DISTBIN/$SQLITE/lib -L$MEDIR/../$DISTBIN/$ZLIB/lib -L. -L$ANDROID/lib"
 
 # fix ptmx and ptc
 # please investigate your Android in the /dev
@@ -70,27 +70,27 @@ LDLAST="$PIEFLAG" \
 sed -i "s|\$(PGEN):.*|\$(PGEN):|" Makefile
 sed -i "s|\$(CC) \$(OPT) \$(LDFLAGS) \$(PGENOBJS) \$(LIBS) -o \$(PGEN)|gcc -pthread -DNDEBUG -fwrapv -O3 -Wall -Wstrict-prototypes  Parser/acceler.c Parser/grammar1.c Parser/listnode.c Parser/node.c Parser/parser.c Parser/parsetok.c Parser/bitset.c Parser/metagrammar.c Parser/firstsets.c Parser/grammar.c Parser/pgen.c Objects/obmalloc.c Python/mysnprintf.c Python/pyctype.c Parser/tokenizer_pgen.c Parser/printgrammar.c Parser/pgenmain.c -lpthread -ldl -lutil -I. -IInclude -o Parser/pgen|" Makefile
 
-export EX_INCDIR="['$ANDROID/include', '$MEDIR/../bin/$SQLITE/include', '$MEDIR/../bin/$NCURSES/include', '$MEDIR/../bin/$ZLIB/include', '$MEDIR/../bin/$OPENSSL/include']"
-export EX_LIBDIR="['$ANDROID/lib', '$MEDIR/../bin/$SQLITE/lib', '$MEDIR/../bin/$NCURSES/lib', '$MEDIR/../bin/$ZLIB/lib', '$MEDIR/../bin/$OPENSSL/lib']"
+export EX_INCDIR="['$ANDROID/include', '$MEDIR/../$DISTBIN/$SQLITE/include', '$MEDIR/../$DISTBIN/$NCURSES/include', '$MEDIR/../$DISTBIN/$ZLIB/include', '$MEDIR/../$DISTBIN/$OPENSSL/include']"
+export EX_LIBDIR="['$ANDROID/lib', '$MEDIR/../$DISTBIN/$SQLITE/lib', '$MEDIR/../$DISTBIN/$NCURSES/lib', '$MEDIR/../$DISTBIN/$ZLIB/lib', '$MEDIR/../$DISTBIN/$OPENSSL/lib']"
 export SQLITE_ON_ANDROID="/system/lib" # where sqlite.so is located on android device; here assume rooted android and sqlite3 in /system/lib
 sed -i "s|\(inc_dirs = self\.compiler\.include_dirs\[:\]\)|\1;inc_dirs+=$EX_INCDIR;|" setup.py
 sed -i "s|\(lib_dirs = self\.compiler\.library_dirs\[:\]\)|\1;lib_dirs+=$EX_LIBDIR;|" setup.py
-sed -i "s|\(sqlite_inc_paths = \[\]\)|\1;sqlite_incdir='$MEDIR/../bin/$SQLITE/include';sqlite_libdir='$MEDIR/../bin/$SQLITE/lib'|" setup.py
-sed -i "s|\(ssl_incs = find_file('openssl/ssl.h', inc_dirs,\)|ssl_incs=['$MEDIR/../bin/$OPENSSL/include'];ssl_libs=['$MEDIR/../bin/$OPENSSL/lib'];\1|" setup.py
+sed -i "s|\(sqlite_inc_paths = \[\]\)|\1;sqlite_incdir='$MEDIR/../$DISTBIN/$SQLITE/include';sqlite_libdir='$MEDIR/../$DISTBIN/$SQLITE/lib'|" setup.py
+sed -i "s|\(ssl_incs = find_file('openssl/ssl.h', inc_dirs,\)|ssl_incs=['$MEDIR/../$DISTBIN/$OPENSSL/include'];ssl_libs=['$MEDIR/../$DISTBIN/$OPENSSL/lib'];\1|" setup.py
 sed -i "s|sqlite_extra_link_args = ()|sqlite_extra_link_args = ('-Wl,-search_paths_first','-Wl,-rpath,$SQLITE_ON_ANDROID')|" setup.py
 
 make
 make -i install
-rm -rf ../bin/$ME
-mkdir -p ../bin/$ME
-mv dist/* ../bin/$ME/
+rm -rf ../$DISTBIN/$ME
+mkdir -p ../$DISTBIN/$ME
+mv dist/* ../$DISTBIN/$ME/
 cd ..
 rm -rf $ME
 
 # fix runtime dependency; let python find libsqlite3.so
-cp bin/$SQLITE/lib/libsqlite3.so.0 bin/$ME/lib/
-rm bin/$ME/bin/python
-cat > bin/$ME/bin/python << EOF
+cp $DISTBIN/$SQLITE/lib/libsqlite3.so.0 $DISTBIN/$ME/lib/
+rm $DISTBIN/$ME/bin/python
+cat > $DISTBIN/$ME/bin/python << EOF
 #!/system/bin/sh
 
 cd \`dirname \$0\`
@@ -98,4 +98,4 @@ PYTHONBINDIR=\`pwd\`/../lib
 export LD_LIBRARY_PATH="\$PYTHONBINDIR"
 ./python2
 EOF
-chmod 755 bin/$ME/bin/python
+chmod 755 $DISTBIN/$ME/bin/python

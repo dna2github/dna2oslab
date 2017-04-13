@@ -29,6 +29,9 @@ Lab:
     - haproxy 1.7.1
     - srelay 0.4.8b6
     - iprelay 1.1
+    - lib:gmp 6.1.2
+    - lib:mpfr 3.1.3
+    - lib:mpc 1.0.3
 
 > Android &lt;5
 

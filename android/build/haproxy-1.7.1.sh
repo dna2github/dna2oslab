@@ -1,7 +1,6 @@
 #/bin/bash
 set -xe
 
-# please compile openssl first
 MEDIR=$(cd `dirname $0`; pwd)
 ME=haproxy-1.7.1
 

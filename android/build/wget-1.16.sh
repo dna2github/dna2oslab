@@ -8,8 +8,8 @@ ME=wget-1.16
 cd $MEDIR
 source env.sh
 source common.sh
-LDFLAGS="$LDFLAGS -L$MEDIR/../bin/openssl-1.0.1j/lib"
-CFLAGS="$CFLAGS -I$MEDIR/../bin/openssl-1.0.1j/include -I$MEDIR/../bin/openssl-1.0.1j/include/openssl -L$MEDIR/../bin/openssl-1.0.1j/lib"
+LDFLAGS="$LDFLAGS -L$MEDIR/../$DISTBIN/openssl-1.0.1p/lib"
+CFLAGS="$CFLAGS -I$MEDIR/../$DISTBIN/openssl-1.0.1p/include -I$MEDIR/../$DISTBIN/openssl-1.0.1p/include/openssl -L$MEDIR/../$DISTBIN/openssl-1.0.1p/lib"
 
 cd ..
 rm -rf $ME

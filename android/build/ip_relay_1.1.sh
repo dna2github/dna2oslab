@@ -24,7 +24,7 @@ mv src/lib_ip_relay.h.fix src/lib_ip_relay.h
 CONFIG="--sysroot=$ANDROID $PIEFLAG"
 $CC $CONFIG -Isrc -I$ANDROID/include -L$ANDROID/lib src/lib_ip_relay.c src/ip_relay.c -o iprelay
 
-mkdir -p ../bin/$ME/bin
-cp iprelay ../bin/$ME/bin
+mkdir -p ../$DISTBIN/$ME/bin
+cp iprelay ../$DISTBIN/$ME/bin
 cd ..
 rm -rf $ME

@@ -19,12 +19,14 @@ export NDKDIR="{----- Google Android NDK path -----}"
 # export SRCTARBALL="/opt"
 # export NDKDIR="/toolchain/android-ndk"
 
+export DISTBIN="bin"
+
 function make_install() {
 # $1: package name
   make install
-  rm -rf ../bin/$1
-  mkdir -p ../bin/$1
-  mv dist/* ../bin/$1/
+  rm -rf ../$DISTBIN/$1
+  mkdir -p ../$DISTBIN/$1
+  mv dist/* ../$DISTBIN/$1/
   cd ..
   rm -rf $1
 }

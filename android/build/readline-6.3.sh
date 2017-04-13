@@ -25,9 +25,9 @@ sed -i 's|\$as_echo_n "checking for wcwidth broken |bash_cv_wcwidth_broken=yes; 
 
 cp $ANDROID/lib/*.o $MEDIR/../$ME/shlib/
 
-export CFLAGS="$CFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses"
-export CXXFLGAS="$CXXFLAGS -I$MEDIR/../bin/ncurses-5.9/include -I$MEDIR/../bin/ncurses-5.9/include/ncurses"
-export LDFLAGS="$LDFLAGS -L$MEDIR/../bin/ncurses-5.9/lib"
+export CFLAGS="$CFLAGS -I$MEDIR/../$DISTBIN/ncurses-5.9/include -I$MEDIR/../$DISTBIN/ncurses-5.9/include/ncurses"
+export CXXFLGAS="$CXXFLAGS -I$MEDIR/../$DISTBIN/ncurses-5.9/include -I$MEDIR/../$DISTBIN/ncurses-5.9/include/ncurses"
+export LDFLAGS="$LDFLAGS -L$MEDIR/../$DISTBIN/ncurses-5.9/lib"
 
 ./configure --host=arm-unknown-linux-gnu --build=x86_64-unknown-linux-gnu --prefix=$MEDIR/../$ME/dist/ --with-curses
 
