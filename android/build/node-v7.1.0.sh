@@ -11,7 +11,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
-fetch_source $SRCTARBALL/$ME.tar.gz https://nodejs.org/dist/v7.1.0/node-v7.1.0.tar.gz
+fetch_source $ME.tar.gz https://nodejs.org/dist/v7.1.0/node-v7.1.0.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out
@@ -24,6 +24,8 @@ sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/stream.c
 sed -i "s/UV__POLLIN/1/g" $MEDIR/../$ME/deps/uv/src/unix/core.c
 sed -i "s/UV__POLLOUT/4/g" $MEDIR/../$ME/deps/uv/src/unix/core.c
 
+export CC="$CC --sysroot=$ANDROID -I$ANDROID/include -L$ANDROID/lib"
+export CXX="$CXX --sysroot=$ANDROID -I$ANDROID/include -L$ANDROID/lib"
 export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS $PIEFLAG"
 export CXXFLAGS="$CXXFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS $PIEFLAG"
 export LDFLAGS="$LDFLAGS $CXXLIBPLUS $PIEFLAG"
@@ -31,19 +33,29 @@ export CPPFLAGS_host=$CXXFLAGS
 export CPPFLAGS=$CXXFLAGS
 export CFLAGS_host=$CFLAGS
 
+# copy from android-configure.sh and set $(ARCH)=arm
+GYP_DEFINES="target_arch=arm"
+GYP_DEFINES+=" v8_target_arch=arm"
+GYP_DEFINES+=" android_target_arch=arm"
+GYP_DEFINES+=" host_os=linux OS=android"
+export GYP_DEFINES
+
 ./configure --prefix=$MEDIR/../$ME/dist/ --without-snapshot --dest-cpu=arm --dest-os=android --with-intl=none
 sed -i "s|LIBS := \\\\|LIBS := -lgnustl_static\\\\|" $MEDIR/../$ME/out/node.target.mk
 sed -i "s|LIBS := \\\\|LIBS := -lgnustl_static\\\\|" $MEDIR/../$ME/out/deps/v8/src/mkpeephole.target.mk
 # skip generate bytecode-peephole-table.cc
 # get no difference; diff -Nur bytecode-peephole-table.cc(mkpeephole on mac) bytecode-peephole-table.cc(mkpeephole on android)
 sed -i 's|"$(builddir)/mkpeephole"|echo|' $MEDIR/../$ME/out/deps/v8/src/v8_base.target.mk
+mkdir -p out/Release/obj.target/v8_base/geni
 cp $MEDIR/node/v8base_geni_bytecode-peephole-table.cc out/Release/obj.target/v8_base/geni/bytecode-peephole-table.cc
 # skip cctest; if want, you may need to add -lgnustl_static to cctest.target.mk
 sed -i "s|include cctest.target.mk|#include cctest.target.mk|" $MEDIR/../$ME/out/Makefile # skip cctest
+sed -i "s|include deps/gtest/gtest.target.mk|#include deps/gtest/gtest.target.mk|" $MEDIR/../$ME/out/Makefile # skip gtest
 
 make
 # if want generate bytecode-peephole-table.cc manually, pls adb push this binary to your android
 # run `./v8_mkpeephole bytecode-peephole-table.cc; replace node/v8base_geni_bytecode-peephole-table.cc with yours`
+mkdir $MEDIR/../$ME/dist/bin
 cp out/Release/mkpeephole $MEDIR/../$ME/dist/bin/v8_mkpeephole
 
 make_install $ME
