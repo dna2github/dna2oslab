@@ -24,6 +24,9 @@ sed -i "s/uv__getiovmax()/1024/" $MEDIR/../$ME/deps/uv/src/unix/stream.c
 sed -i "s/UV__POLLIN/1/g" $MEDIR/../$ME/deps/uv/src/unix/core.c
 sed -i "s/UV__POLLOUT/4/g" $MEDIR/../$ME/deps/uv/src/unix/core.c
 
+# see # see https://github.com/nodejs/node/issues/3074
+sed -i 's/#define HAVE_GETSERVBYPORT_R 1/#undef HAVE_GETSERVBYPORT_R/' deps/cares/config/android/ares_config.h 
+
 export CC="$CC --sysroot=$ANDROID -I$ANDROID/include -L$ANDROID/lib"
 export CXX="$CXX --sysroot=$ANDROID -I$ANDROID/include -L$ANDROID/lib"
 export CFLAGS="$CFLAGS $CXXCONFIGFLAGS $CXXLIBPLUS $PIEFLAG"
