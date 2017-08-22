@@ -28,5 +28,7 @@ export LDFLAGS="--sysroot=$ANDROID -L$ANDROID/lib $PIEFLAG"
 export CXXPLUS="$NDKDIR/sources/cxx-stl/gnu-libstdc++/${GCC_VERSION}"
 export CXXCONFIGFLAGS="-I$CXXPLUS/include -I$CXXPLUS/libs/armeabi/include"
 export CXXLIBPLUS="-L$CXXPLUS/libs/armeabi"
+export LIBCXX="$NDKDIR/sources/cxx-stl/llvm-libc++/libs/armeabi"
+export LIBCXXFLAGS="-I$LIBCXX/include -I$NDKDIR/sources/cxx-stl/llvm-libc++/libcxx/include"
 export CONFIGFLAGS="--build=x86_64-linux --host=arm-eabi --target=arm-eabi --with-sysroot=$ANDROID"
 
