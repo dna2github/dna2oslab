@@ -37,3 +37,10 @@ function fetch_source() {
   test -f "$SRCTARBALL/$1" || curl -k -L -o "$SRCTARBALL/$1" "$2"
   test -f "$SRCTARBALL/$1" || exit 1
 }
+
+function prepare_toolchain() {
+# in future, access to gcc/clang from local generated dir instead of from ndk directly
+# $1: toolchain install dir
+  rm -rf $1
+  python $NDKDIR/build/tools/make_standalone_toolchain.py --arch arm --api $ANDROID_VERSION --install-dir $1
+}
