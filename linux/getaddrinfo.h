@@ -128,6 +128,92 @@ static int __dns_decode_name(char *name, const char *dns_name) {
    return 0;
 }
 
+
+static int __dns_is_ipv4(const char *hostname, unsigned int *ipaddr) {
+   // ip part number, digital count, section count
+   unsigned int n = 0, c = 0, s = 0, i;
+   unsigned int ip = 0, len = strlen(hostname)+1;
+   const char *cur = hostname;
+   char ch = 0;
+   if (len > 15) return 0;
+   for(i = 0; i < len; i++) {
+      ch = cur[i];
+      if (ch == '.') {
+         if (c == 0 || c > 3 || s > 3 || n > 255) return 0;
+         ip = (ip<<8) | n;
+         s++; c = 0; n = 0;
+         continue;
+      } else if (ch == 0) {
+         if (c == 0 || n > 255) return 0;
+         s ++;
+         if (s != 4) return 0;
+         ip = (ip<<8) | n;
+         if (ipaddr) *ipaddr = ip;
+         return 1;
+      }
+      if (ch < '0' || ch > '9') return 0;
+      n = n * 10 + ch - '0';
+      c++;
+   }
+   // should not be here
+   return 0;
+}
+
+static int __dns_ipv4(const char *ip, struct addrinfo **res) {
+   unsigned int ipaddr = 0;
+   int name_len = strlen(ip);
+   char *one = (char*)malloc(
+      sizeof(struct addrinfo) + sizeof(struct sockaddr_in) + name_len+1);
+   struct addrinfo *info = (struct addrinfo*)one;
+   struct sockaddr_in *sa =
+      (struct sockaddr_in*)(one + sizeof(struct addrinfo));
+   char *cname =
+      one + sizeof(struct addrinfo) + sizeof(struct sockaddr_in);
+   strcpy(cname, ip);
+   info->ai_flags = 0;
+   info->ai_family = AF_INET;
+   info->ai_socktype = SOCK_STREAM;
+   info->ai_protocol = 0;
+   info->ai_addrlen = sizeof(struct sockaddr_in);
+   info->ai_addr = (struct sockaddr *)sa;
+   info->ai_canonname = cname;
+   info->ai_next = 0;
+   sa->sin_family = AF_INET;
+   sa->sin_port = 0;
+   printf("x1 ...\n");
+   __dns_is_ipv4(ip, &ipaddr);
+   printf("x2 ...\n");
+   sa->sin_addr.s_addr = htonl(ipaddr);
+   *res = info;
+   return 0;
+}
+
+static int __dns_localhost(struct addrinfo **res) {
+   const char *name = "localhost";
+   int name_len = strlen(name);
+   char *one = (char*)malloc(
+      sizeof(struct addrinfo) + sizeof(struct sockaddr_in) + name_len+1);
+   struct addrinfo *info = (struct addrinfo*)one;
+   struct sockaddr_in *sa =
+      (struct sockaddr_in*)(one + sizeof(struct addrinfo));
+   char *cname =
+      one + sizeof(struct addrinfo) + sizeof(struct sockaddr_in);
+   strcpy(cname, name);
+   info->ai_flags = 0;
+   info->ai_family = AF_INET;
+   info->ai_socktype = SOCK_STREAM;
+   info->ai_protocol = 0;
+   info->ai_addrlen = sizeof(struct sockaddr_in);
+   info->ai_addr = (struct sockaddr *)sa;
+   info->ai_canonname = cname;
+   info->ai_next = 0;
+   sa->sin_family = AF_INET;
+   sa->sin_port = 0;
+   sa->sin_addr.s_addr = 0x0100007f;
+   *res = info;
+   return 0;
+}
+
 static int __dns_parse(const char *buf, int query_len, struct addrinfo **res) {
    unsigned char h, l;
    unsigned int n = 0;
@@ -178,7 +264,28 @@ static int __dns_parse(const char *buf, int query_len, struct addrinfo **res) {
    return 0;
 }
 
+static int __dns_port(const char *port, struct addrinfo **res) {
+   // e.g. __dns_port(service, res); if assume service means port
+   struct addrinfo *cur = *res;
+   unsigned int portnum = 0;
+   if (port) portnum = atoi(port);
+   while(cur) {
+      ((struct sockaddr_in*)(cur->ai_addr))->sin_port = portnum;
+      cur = cur->ai_next;
+   }
+   return 0;
+}
+
 static int getaddrinfo_mod(const char *hostname, const char *service, const struct addrinfo *hints, struct addrinfo **res) {
+   // TODO read map between domain name and ip from cache
+   if (!strncmp("localhost", hostname, 9)) {
+      __dns_localhost(res);
+      return 0;
+   }
+   if (__dns_is_ipv4(hostname, 0)) {
+      __dns_ipv4(hostname, res);
+      return 0;
+   }
    __dns_read_resolve();
    if (__dns_server[0] == 0) {
       return EAI_SYSTEM;
