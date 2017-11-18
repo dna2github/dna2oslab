@@ -21,7 +21,7 @@ find . | cpio -o -c | gzip -9 > new_initrd.img
 
 # mknod --help
 mkdir initrd && cd initrd
-mkdir bin sbin dev tmp proc var etc
+mkdir bin sbin dev tmp proc var etc sys
 mknod dev/
 cp -r /path/to/kernel/* ./
 cp /path/to/busybox bin/busybox
@@ -81,7 +81,7 @@ mkfs.ext2 disk.img
 mkdir disk
 mount disk.img disk
 echo do ln, mknod and tar xf linux-<version>.tar; rm -rf lib boot/vmlinux-<version>
-LOID=losetup -f --show disk.img
+LOID=$(losetup -f --show disk.img)
 # if meet `error: embedding is not possible, but this is required for cross-disk install.`
 # please download grub source code and compile it
 # modify grub-core/gnulib/stdio.h: #undef gets => #undef gets \n #define gets fgets
@@ -95,4 +95,13 @@ qemu-system-x86_64 -m 1024m -curses -hda disk.img
 >> linux /boot/vmlinuz-<version> noapic
 >> initrd /boot/test.initrd
 >> boot
+
+mount proc /proc -t proc
+mount sys /sys -t sysfs
+mount dev /dev -t devtmpfs
+mount tmp /tmp -t tmpfs
+
+ifconfig eth0 <ip> netmask 255.255.255.0 up
+ip route add default via <ip> dev eth0
+
 ```
