@@ -1,6 +1,26 @@
+/*
+  How to use
+  - busybox:
+    - copy getaddrinfo.h to ./include/
+    - in ./networking/nslookup.c and ./networking/xconnect.c under #include <netdb.h> add one line:
+      - #include "getaddrinfo.h"
+    - compile busybox statically
+    = nslookup, ping, wget applets will work with resolving domaain name
+
+  - nodejs:
+    - copy getaddrinfo.h to ./deps/uv/src/unix/
+    - in ./deps/uv/src/unix/getaddrinfo.c under #include <netdb.h> add one line:
+      - #include "getaddrinfo.h"
+    - compile node fully statically
+    = `npm install` will work
+
+  - add #define SERVICE_AS_PORT after #include lines in this file
+    to make create server works
+ */
+// ref: http://www.binarytides.com/dns-query-code-in-c-with-linux-sockets/
+
 #ifndef GETADDRINFO_MOD_H
 #define GETADDRINFO_MOD_H
-// ref: http://www.binarytides.com/dns-query-code-in-c-with-linux-sockets/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -280,10 +300,16 @@ static int getaddrinfo_mod(const char *hostname, const char *service, const stru
    // TODO read map between domain name and ip from cache
    if (!strncmp("localhost", hostname, 9)) {
       __dns_localhost(res);
+#ifdef SERVICE_AS_PORT
+      __dns_port(service, res);
+#endif
       return 0;
    }
    if (__dns_is_ipv4(hostname, 0)) {
       __dns_ipv4(hostname, res);
+#ifdef SERVICE_AS_PORT
+      __dns_port(service, res);
+#endif
       return 0;
    }
    __dns_read_resolve();
@@ -306,6 +332,9 @@ static int getaddrinfo_mod(const char *hostname, const char *service, const stru
    }
    close(s);
    __dns_parse(buf, len, res);
+#ifdef SERVICE_AS_PORT
+   __dns_port(service, res);
+#endif
    return 0;
 }
 
