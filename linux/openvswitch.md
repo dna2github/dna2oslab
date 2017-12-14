@@ -61,7 +61,9 @@ openvswitch-xxx/bin/ovs-vsctl del-port $switch $eth
 ```
 
 ```
-qemu-system-x86_64 -m 512 -curses -hda disk.vmdk -net nic,mac=52:54:00:12:34:56 -net tap,script=ovs-ifup,downscript=ovs=ifdown
+qemu-system-x86_64 -m 512 -curses -hda disk.vmdk \
+   -net nic,mac=00:00:00:00:00:01 \
+   -net tap,script=ovs-ifup,downscript=ovs-ifdown
 
 >>> ifconfig eth0 <ip> netmask 255.255.255.0 up
 >>> ip route add default via <gateway_ip> dev eth0
