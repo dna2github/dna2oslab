@@ -9,7 +9,7 @@
 ## How to use binary file in Android application
 
 - examples:
-   - [NodeBase (run NodeJS)](https://github.com/dna2github/dna2mtgol/blob/master/nodeBase)
+   - [NodeBase (run NodeJS)](https://github.com/dna2github/nodeBase)
    - [FileShare (run Nginx)](https://github.com/dna2github/dna2mtgol/blob/master/fileShare)
    - [Shadowsocks Proxy (run ss-local, tun2socks, ...)](https://github.com/shadowsocks/shadowsocks-android)
 
@@ -24,8 +24,9 @@ Lab:
     - python-2.7.13
     - node-v4.4.4
     - node-v6.5.0
-    - node-v7.1.0 and [How to use compiled NodeJS in APK](https://github.com/dna2github/dna2mtgol/blob/master/nodeBase)
-    - node-v8.4.0
+    - node-v7.1.0 and [How to use compiled NodeJS in APK](https://github.com/dna2github/nodeBase)
+    - node-v8.9.4
+    - node-v9.5.0
     - vim-8.0
     - haproxy 1.7.1
     - srelay 0.4.8b6
