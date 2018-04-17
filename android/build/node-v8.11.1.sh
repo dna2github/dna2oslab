@@ -3,7 +3,7 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=node-v8.9.4
+ME=node-v8.11.1
 
 cd $MEDIR
 source env.sh
@@ -11,7 +11,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz https://nodejs.org/dist/v8.9.4/node-v8.9.4.tar.gz
+fetch_source $ME.tar.gz https://nodejs.org/dist/v8.11.1/node-v8.11.1.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist out
