@@ -1,9 +1,19 @@
 #/bin/bash
 
-echo "Please configure this env.sh ..."
-echo "  SRCTARBALL, NDKDIR, BUILD_MACHINE, ANDROID_VERSION, GCC_VERSION"
+cat <<EOF
+Please configure this env.sh ...
+  SRCTARBALL, NDKDIR, BUILD_MACHINE, ANDROID_VERSION, GCC_VERSION
+
+Notice:
+If use NDK r14+, alter common.sh a little bit:
+  --sysroot=\$NDKDIR/sysroot/usr
+It is recommended to create a toolchain with "prepare_toolchain" method below:
+  python \$NDKDIR/build/tools/make_standalone_toolchain.py --arch arm --api \$ANDROID_VERSION --install-dir /path/to/somewhere
+  modify common.sh to make sure path -I and -L folders exist
+Remember add "-D__ANDROID_API__=\$ANDROID_VERSION" when compile with gcc
+EOF
 exit 1
-# Then remove above echo and exit
+# Then remove above cat and exit
 
 # Prepare Environment
 export ANDROID_VERSION="{----- android version: e.g. 17 =Android 4.2 -----}"
