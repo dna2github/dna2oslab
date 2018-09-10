@@ -6,7 +6,7 @@ PREFIX=
 PCRE=pcre-8.37
 OPENSSL=openssl-1.0.1p
 ZLIB=zlib-1.2.8
-PIE="-pie -fPIE -rdynamic"
+PIE=-pie -fPIE -rdynamic
 
 
 ALL_INCS = -I src/core \
