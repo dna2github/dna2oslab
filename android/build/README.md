@@ -25,7 +25,7 @@ Lab:
     - node-v4.4.4
     - node-v6.5.0
     - node-v7.1.0 and [How to use compiled NodeJS in APK](https://github.com/dna2github/nodeBase)
-    - node-v8.9.4
+    - node-v8.12.0
     - node-v9.5.0
     - vim-8.0
     - haproxy 1.7.1
