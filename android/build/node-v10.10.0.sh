@@ -92,7 +92,7 @@ echo "            --with-intl=none --cross-compiling --prefix=$MEDIR/../$ME/dist
 find $MEDIR/../$ME/android-toolchain -name "libc++_shared.so" | xargs rm
 
 # gcc reprot unrecognized flag of "-m64" error
-find $MEDIR/../$ME/out/deps/openssl -name "openssl*.mk" | xargs sed -i '' 's/-m64//g'
+find $MEDIR/../$ME/out/deps/openssl -name "openssl*.mk" | xargs sed -i 's/-m64//g'
 
 F=$MEDIR/../$ME/out/node.target.mk
 sed -i "s|-llog|-llog -L$NDKDIR/sources/cxx-stl/llvm-libc++/libs/armeabi -landroid_support|g" $F
@@ -151,19 +151,19 @@ EOF
 F=$MEDIR/../$ME/deps/v8/third_party/antlr4/runtime/Cpp/runtime/src/antlr4-common.h
 cat >> $F < $MEDIR/../$ME/xpatch.h
 F=$MEDIR/../$ME/deps/v8/include/v8config.h
-sed -i '' 's/#endif.*V8CONFIG_H_//' $F
+sed -i 's/#endif.*V8CONFIG_H_//' $F
 cat >> $F < $MEDIR/../$ME/xpatch.h
 echo "#endif  // V8CONFIG_H_" >> $F
-grep "std::to_string" $MEDIR/../$ME -r | cut -d ':' -f 1 | sort -u | xargs sed -i '' "s/std::to_string/xpatch::to_string/g"
+grep "std::to_string" $MEDIR/../$ME -r | cut -d ':' -f 1 | sort -u | xargs sed -i "s/std::to_string/xpatch::to_string/g"
 F=$MEDIR/../$ME/deps/v8/src/torque/implementation-visitor.cc
-sed -i '' "s/std::stod/xpatch::stod/" $F
+sed -i "s/std::stod/xpatch::stod/" $F
 F=$MEDIR/../$ME/deps/v8/third_party/antlr4/runtime/Cpp/runtime/src/tree/pattern/ParseTreePatternMatcher.cpp
-sed -i '' "s/std::rethrow_if_nested(e);/throw e;/" $F
+sed -i "s/std::rethrow_if_nested(e);/throw e;/" $F
 F=$MEDIR/../$ME/deps/v8/third_party/antlr4/runtime/Cpp/runtime/src/UnbufferedCharStream.cpp
-sed -i '' "s/std::throw_with_nested(RuntimeException());/throw RuntimeException()/" $F
+sed -i "s/std::throw_with_nested(RuntimeException());/throw RuntimeException()/" $F
 F=$MEDIR/../$ME/deps/v8/third_party/antlr4/runtime/Cpp/runtime/src/BailErrorStrategy.cpp
-sed -i '' "s/std::rethrow_exception(/throw (" $F
-sed -i '' "s/std::throw_with_nested(ParseCancellationException())/throw ParseCancellationException()/g" $F
+sed -i "s/std::rethrow_exception(/throw (" $F
+sed -i "s/std::throw_with_nested(ParseCancellationException())/throw ParseCancellationException()/g" $F
 
 # TODO: more exception_ptr related errors and
 #       need alternatives ...
