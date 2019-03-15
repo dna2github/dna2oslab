@@ -92,7 +92,7 @@ echo "            --with-intl=none --cross-compiling --prefix=$MEDIR/../$ME/dist
 find $MEDIR/../$ME/android-toolchain -name "libc++_shared.so" | xargs rm
 
 # gcc reprot unrecognized flag of "-m64" error
-find $MEDIR/../$ME/out/deps/openssl -name "openssl*.mk" | xargs sed -i 's/-m64//g'
+# find $MEDIR/../$ME/out/deps/openssl -name "openssl*.mk" | xargs sed -i 's/-m64//g'
 
 F=$MEDIR/../$ME/out/node.target.mk
 sed -i "s|-llog|-llog -L$NDKDIR/sources/cxx-stl/llvm-libc++/libs/armeabi -landroid_support|g" $F
@@ -110,7 +110,7 @@ sed -i "s|-ldl||g" $F
 # they are copied to $MEDIR/../$ME/.xpatch/torque-generated
 # we fake the command to skip the generation and copy back files to right place
 F=$MEDIR/../$ME/out/deps/v8/gypfiles/v8_torque.host.mk
-sed -i "s|cmd__Users_admin_Desktop_test_dna_dna2oslab_android_node_v10_10_0_deps_v8_gypfiles_v8_gyp_v8_torque_host_run_torque.*|cmd__Users_admin_Desktop_test_dna_dna2oslab_android_node_v10_10_0_deps_v8_gypfiles_v8_gyp_v8_torque_host_run_torque = echo fake torque generated|" $F
+sed -i "s|cmd__\(.*\)v8_gyp_v8_torque_host_run_torque.*|cmd__\1v8_gyp_v8_torque_host_run_torque = echo fake torque generated|" $F
 mkdir -p $MEDIR/../$ME/out/Release/obj/gen/torque-generated
 cp -r $MEDIR/../$ME/.xpatch/torque-generated/* $MEDIR/../$ME/out/Release/obj/gen/torque-generated/
 
