@@ -31,8 +31,6 @@ mkdir -p dist
 sed -i "s/mblen(NULL, 0)/1/" src/mbyte.c
 sed -i "s/mblen(buf, (size_t)1)/1/" src/mbyte.c
 touch src/strings.h
-cp $ANDROID/lib/crtbegin_dynamic.o $MEDIR/../$ME/src/crtbegin_dynamic.o
-cp $ANDROID/lib/crtend_android.o $MEDIR/../$ME/src/crtend_android.o
 
 ./configure $CONFIGFLAGS --prefix=$MEDIR/../$ME/dist/ \
     --disable-gpm --disable-sysmouse --disable-nls --disable-gtktest --disable-acl \

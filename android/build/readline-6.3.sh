@@ -23,8 +23,6 @@ mkdir -p dist
 
 sed -i 's|\$as_echo_n "checking for wcwidth broken |bash_cv_wcwidth_broken=yes; $as_echo_n "checking for wcwidth broken |g' configure
 
-cp $ANDROID/lib/*.o $MEDIR/../$ME/shlib/
-
 export CFLAGS="$CFLAGS -I$MEDIR/../$DISTBIN/ncurses-5.9/include -I$MEDIR/../$DISTBIN/ncurses-5.9/include/ncurses"
 export CXXFLGAS="$CXXFLAGS -I$MEDIR/../$DISTBIN/ncurses-5.9/include -I$MEDIR/../$DISTBIN/ncurses-5.9/include/ncurses"
 export LDFLAGS="$LDFLAGS -L$MEDIR/../$DISTBIN/ncurses-5.9/lib"

@@ -11,7 +11,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz http://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
+fetch_source $ME.tar.gz https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
@@ -22,4 +22,7 @@ mkdir -p dist
     --with-sysroot=$ANDROID
 
 make
+
+find $MEDIR/../$ME/dist -name "*.la" | xargs rm -f
+
 make_install $ME

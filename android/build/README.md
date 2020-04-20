@@ -13,53 +13,30 @@
    - [FileShare (run Nginx)](https://github.com/dna2github/dna2mtgol/blob/master/fileShare)
    - [Shadowsocks Proxy (run ss-local, tun2socks, ...)](https://github.com/shadowsocks/shadowsocks-android)
 
-> Android 6 only supports binaries with PIE enabled
+- Tested:
+   - haproxy-1.7.1.sh
+   - ip\_relay\_1.1.sh
+   - node-v0.12.6.sh
+   - srelay-0.4.8b6.sh
+   - tar-1.27.sh
+   - tcptunnel-0.8.sh
+   - zlib-1.2.11.sh
+   - openssl-1.1.1f.sh
+   - pcre-8.37.sh
+   - ncurses-5.9.sh
+   - readline-6.3.sh
+   - sqlite-autoconf-3310100.sh
 
-Binary Test Machine:
-  Huawei Honor 5A (Android 6.0)
-
-Lab:
-- compile binaries
-    - nginx-1.10.2 and [How to use compiled Nginx in APK](https://github.com/dna2github/dna2mtgol/tree/master/fileShare)
-    - python-2.7.13
-    - node-v4.4.4
-    - node-v6.5.0
-    - node-v7.1.0 and [How to use compiled NodeJS in APK](https://github.com/dna2github/nodeBase)
-    - node-v8.12.0
-    - node-v9.5.0
-    - vim-8.0
-    - haproxy 1.7.1
-    - srelay 0.4.8b6
-    - iprelay 1.1
-    - lib:gmp 6.1.2
-    - lib:mpfr 3.1.3
-    - lib:mpc 1.0.3
-
-> Android &lt;5
-
-- Machine Configuration:
-  - Linux 64-bits
-  - Google Android NDK
-
-- Binary Test Machine:
-  - Redmi Note (Android 4.4)
-  - Huawei Y511 (Android 4.2)
-  - HTC G7 (Android 2.2)
-
-Lab:
-- compile libraries
-    - openssl-1.0.1j
-    - ncurses-5.7
-    - zlib-1.2.8
-    - pcre-8.37
-    - readline-6.3
-- compile binaries
-    - tar-1.27
-    - vim-7.4 (see also vim-8.0-pie.sh)
-    - wget-1.16
-    - binutils-2.24
-    - sqlite-autoconf-3080701
-    - python-2.7.13 => (pip => django gevent-socketio2 numpy)
-    - node-v0.12.6
-    - node-v4.4.4
-    - nginx-1.10.2 (see also nginx-1.10.2-pie.sh)
+- TODO
+   - binutils-2.24.sh
+   - gmp-6.1.2.sh
+   - mpc-1.0.3.sh
+   - mpfr-3.1.3.sh
+   - nginx-1.10.2.sh
+   - node-v10.15.3.sh
+   - node-v4.4.4.sh
+   - node-v6.5.0.sh
+   - node-v8.12.0.sh
+   - python-2.7.13.sh
+   - vim-8.0.sh
+   - wget-1.16.sh

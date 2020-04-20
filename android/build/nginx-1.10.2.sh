@@ -52,8 +52,8 @@ mkdir -p objs/src/http/{modules,v2}
 mkdir -p objs/src/modules/perl
 mkdir -p objs/src/os/unix
 
-OPENSSL=openssl-1.0.1p
-ZLIB=zlib-1.2.8
+OPENSSL=openssl-1.1.1f
+ZLIB=zlib-1.2.11
 PCRE=pcre-8.37
 OPENSSLFLAGS="-I$MEDIR/../$DISTBIN/$OPENSSL/include -I$MEDIR/../$DISTBIN/$OPENSSL/include/openssl -L$MEDIR/../$DISTBIN/$OPENSSL/lib"
 ZLIBFLAGS="-I$MEDIR/../$DISTBIN/$ZLIB/include -L$MEDIR/../$DISTBIN/$ZLIB/lib"

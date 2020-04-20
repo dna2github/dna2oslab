@@ -2,7 +2,7 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=sqlite-autoconf-3080701
+ME=sqlite-autoconf-3310100
 
 cd $MEDIR
 source env.sh
@@ -10,7 +10,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz http://www.sqlite.org/2016/sqlite-autoconf-3080701.tar.gz
+fetch_source $ME.tar.gz https://www.sqlite.org/2020/sqlite-autoconf-3310100.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
