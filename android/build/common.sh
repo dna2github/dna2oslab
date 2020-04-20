@@ -4,11 +4,11 @@ SELF=$(cd `dirname $0`; pwd)
 
 if [ ! -d "$SELF/local/toolchain" ]; then
    mkdir -p $SELF/local
-   python $NDKDIR/build/tools/make_standalone_toolchain.py --arch arm --api $ANDROID_VERSION --install-dir $SELF/local/toolchain
+   python $NDKDIR/build/tools/make_standalone_toolchain.py --arch arm64 --api $ANDROID_VERSION --install-dir $SELF/local/toolchain
 fi
 export COMPILER="$SELF/local/toolchain/bin"
-export CC="$COMPILER/arm-linux-androideabi-clang"
-export CXX="$COMPILER/arm-linux-androideabi-clang++"
+export CC="$COMPILER/aarch64-linux-android-clang"
+export CXX="$COMPILER/aarch64-linux-android-clang++"
 export LD="$COMPILER/arm-linux-androideabi-ld"
 export AS="$COMPILER/arm-linux-androideabi-as"
 export AR="$COMPILER/arm-linux-androideabi-ar"

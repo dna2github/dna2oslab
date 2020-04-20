@@ -13,6 +13,8 @@
    - [FileShare (run Nginx)](https://github.com/dna2github/dna2mtgol/blob/master/fileShare)
    - [Shadowsocks Proxy (run ss-local, tun2socks, ...)](https://github.com/shadowsocks/shadowsocks-android)
 
+## Script List
+
 - Tested:
    - haproxy-1.7.1.sh
    - ip\_relay\_1.1.sh
@@ -26,17 +28,18 @@
    - ncurses-5.9.sh
    - readline-6.3.sh
    - sqlite-autoconf-3310100.sh
-
-- TODO
    - binutils-2.24.sh
+   - nginx-1.10.2.sh
    - gmp-6.1.2.sh
    - mpc-1.0.3.sh
    - mpfr-3.1.3.sh
-   - nginx-1.10.2.sh
+   - vim-8.0.sh
+
+- TODO
    - node-v10.15.3.sh
+   - node-v13.13.0.sh
    - node-v4.4.4.sh
    - node-v6.5.0.sh
    - node-v8.12.0.sh
    - python-2.7.13.sh
-   - vim-8.0.sh
    - wget-1.16.sh
