@@ -1,9 +1,14 @@
 #/bin/bash
 
-export COMPILER="$NDKDIR/toolchains/arm-linux-androideabi-${GCC_VERSION}/prebuilt/${BUILD_MACHINE}/bin"
-export CC="$COMPILER/arm-linux-androideabi-gcc"
-export CXX="$COMPILER/arm-linux-androideabi-g++"
-export CPP="$COMPILER/arm-linux-androideabi-cpp"
+SELF=$(cd `dirname $0`; pwd)
+
+if [ ! -d "$SELF/local/toolchain" ]; then
+   mkdir -p $SELF/local
+   python $NDKDIR/build/tools/make_standalone_toolchain.py --arch arm --api $ANDROID_VERSION --install-dir $SELF/local/toolchain
+fi
+export COMPILER="$SELF/local/toolchain/bin"
+export CC="$COMPILER/arm-linux-androideabi-clang"
+export CXX="$COMPILER/arm-linux-androideabi-clang++"
 export LD="$COMPILER/arm-linux-androideabi-ld"
 export AS="$COMPILER/arm-linux-androideabi-as"
 export AR="$COMPILER/arm-linux-androideabi-ar"
@@ -15,20 +20,12 @@ export NM="$COMPILER/arm-linux-androideabi-nm"
 export STRINGS="$COMPILER/arm-linux-androideabi-strings"
 export READELF="$COMPILER/arm-linux-androideabi-readelf"
 
-export ANDROID="$NDKDIR/platforms/android-${ANDROID_VERSION}/arch-arm/usr"
+export ANDROID="$SELF/local/toolchain/sysroot"
 export PIEFLAG=""
 if [ "$ANDROID_VERSION" -gt 22 ]; then
   export PIEFLAG="-fPIE -pie"
 fi
-export CFLAGS="--sysroot=$ANDROID -I$ANDROID/include $PIEFLAG"
-export CXXFLAGS="$CLFAGS"
-export CPPFLAGS="$CFLAGS"
-export LDFLAGS="--sysroot=$ANDROID -L$ANDROID/lib $PIEFLAG"
 
-export CXXPLUS="$NDKDIR/sources/cxx-stl/gnu-libstdc++/${GCC_VERSION}"
-export CXXCONFIGFLAGS="-I$CXXPLUS/include -I$CXXPLUS/libs/armeabi/include"
-export CXXLIBPLUS="-L$CXXPLUS/libs/armeabi"
-export LIBCXX="$NDKDIR/sources/cxx-stl/llvm-libc++/libs/armeabi"
-export LIBCXXFLAGS="-I$LIBCXX/include -I$NDKDIR/sources/cxx-stl/llvm-libc++/libcxx/include"
-export CONFIGFLAGS="--build=x86_64-linux --host=arm-eabi --target=arm-eabi --with-sysroot=$ANDROID"
+export CROSSFLAGS="--build=x86_64-linux --host=arm-eabi --target=arm-eabi"
+export CONFIGFLAGS="$CROSSFLAGS --with-sysroot=$ANDROID"
 

@@ -11,8 +11,8 @@ It is recommended to create a toolchain with "prepare_toolchain" method below:
   python \$NDKDIR/build/tools/make_standalone_toolchain.py --arch arm --api \$ANDROID_VERSION --install-dir /path/to/somewhere
   modify common.sh to make sure path -I and -L folders exist
 Remember add "-D__ANDROID_API__=\$ANDROID_VERSION" when compile with gcc
-EOF
 exit 1
+EOF
 # Then remove above cat and exit
 
 # Prepare Environment
@@ -27,7 +27,7 @@ export NDKDIR="{----- Google Android NDK path -----}"
 # export BUILD_MACHINE="darwin-x86_64" # build on macosx; for linux, usually "linux-x86_64"; not yet try on windows
 # export GCC_VERSION="4.9"
 # export SRCTARBALL="/opt"
-# export NDKDIR="/toolchain/android-ndk"
+# export NDKDIR="/toolchain/android-sdk/ndk-bundle"
 
 export DISTBIN="bin"
 

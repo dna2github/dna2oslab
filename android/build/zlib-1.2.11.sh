@@ -2,7 +2,7 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=zlib-1.2.8
+ME=zlib-1.2.11
 
 cd $MEDIR
 source env.sh
@@ -10,7 +10,7 @@ source common.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz http://zlib.net/zlib-1.2.8.tar.gz
+fetch_source $ME.tar.gz http://zlib.net/zlib-1.2.11.tar.gz
 tar zxf $SRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
