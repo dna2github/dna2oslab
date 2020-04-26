@@ -34,6 +34,7 @@
    - mpc-1.0.3.sh
    - mpfr-3.1.3.sh
    - vim-8.0.sh
+   - wget2-1.99.2.sh
 
 - TODO
    - node-v10.15.3.sh
@@ -42,4 +43,3 @@
    - node-v6.5.0.sh
    - node-v8.12.0.sh
    - python-2.7.13.sh
-   - wget-1.16.sh

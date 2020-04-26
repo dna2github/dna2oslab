@@ -18,5 +18,6 @@ mkdir -p dist
 ./configure $CONFIGFLAGS --prefix=$MEDIR/../$ME/dist/
 
 make
+rm -f dist/lib/*.la
 make_install $ME
 
