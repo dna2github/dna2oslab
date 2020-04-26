@@ -16,9 +16,10 @@
 ## Script List
 
 - Tested:
+   - node-v0.12.6.sh
+   - node-v13.13.0.sh
    - haproxy-1.7.1.sh
    - ip\_relay\_1.1.sh
-   - node-v0.12.6.sh
    - srelay-0.4.8b6.sh
    - tar-1.27.sh
    - tcptunnel-0.8.sh
@@ -38,7 +39,6 @@
 
 - TODO
    - node-v10.15.3.sh
-   - node-v13.13.0.sh
    - node-v4.4.4.sh
    - node-v6.5.0.sh
    - node-v8.12.0.sh
