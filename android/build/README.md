@@ -38,8 +38,4 @@
    - wget2-1.99.2.sh
 
 - TODO
-   - node-v10.15.3.sh
-   - node-v4.4.4.sh
-   - node-v6.5.0.sh
-   - node-v8.12.0.sh
    - python-2.7.13.sh
