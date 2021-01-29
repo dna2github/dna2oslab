@@ -1,5 +1,7 @@
 # Android Platform Lab
 
+# [ ! ] deprecated, please read compile script in [buildv2](../buildv2)
+
 ## How to build
 
 1. download Google Android Native Development Kits (NDK)
