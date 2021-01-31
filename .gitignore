@@ -1,4 +1,5 @@
 .DS_Store
 .vscode
-android/bin
 local
+android/bin
+android/dist

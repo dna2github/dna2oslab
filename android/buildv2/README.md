@@ -16,4 +16,15 @@
 ## Script List
 
 - Tested:
+   - haproxy-2.3.4.sh
+   - ip_relay_1.1.sh
+   - ncurses-6.2.sh
    - node-v14.15.4.sh
+   - openssl-1.1.1i.sh
+   - pcre-8.44.sh
+   - sqlite-autoconf-3340100.sh
+   - tar-1.27.sh
+   - tcptunnel-0.8.sh
+   - vim-8.2.sh
+   - wget2-1.99.2.sh
+   - zlib-1.2.11.sh

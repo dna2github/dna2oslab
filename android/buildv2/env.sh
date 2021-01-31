@@ -5,7 +5,7 @@ SELF=$(cd `dirname $0`; pwd)
 export NDK=""
 export ENVSRCTARBALL=""
 export HOST_GCC_DIR=""
-export ENVDISTBIN="dst"
+export ENVDISTBIN="dist"
 export ENVHOST=linux-x86_64
 export ENVTARGET=aarch64-linux-android
 export ENVANDROIDVER=23
@@ -38,13 +38,7 @@ export STRINGS="$COMPILERDIR/$ENVTARGET-strings"
 export READELF="$COMPILERDIR/$ENVTARGET-readelf"
 
 export ANDROID="$COMPILERDIR/../sysroot"
-#export PIEFLAG=""
-#if [ "$ANDROID_VERSION" -gt 22 ]; then
-#  export PIEFLAG="-fPIE -pie"
-#fi
-
-#export CROSSFLAGS="--build=x86_64-linux --host=arm-eabi --target=arm-eabi"
-#export CONFIGFLAGS="$CROSSFLAGS --with-sysroot=$ANDROID"
+export CROSS_COMPILE="--build=x86_64-linux --host=arm-eabi --target=arm-eabi"
 
 function make_install() {
 # $1: package name
