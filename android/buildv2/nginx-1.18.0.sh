@@ -74,8 +74,8 @@ export LDFLAGS="$LDFLAGS -L`pwd`/../dist/$PCRE/lib -L`pwd`/../dist/$ZLIB/lib"
 # it must be related to NGX_AUTOTEST where we disable all binary execution
 ./configure --prefix=$MEDIR/../$ME/dist/ \
    --with-openssl=`pwd`/3rd/$OPENSSL --with-openssl-opt="no-asm -fPIC" \
-   --with-pcre=`pwd/3rd/$PCRE`  --with-pcre-opt="$XCFLAGS" \
-   --with-zlib=`pwd/3rd/$ZLIB`  --with-zlib-opt="$XCFLAGS" \
+   --with-pcre=`pwd`/3rd/$PCRE  --with-pcre-opt="$XCFLAGS" \
+   --with-zlib=`pwd`/3rd/$ZLIB  --with-zlib-opt="$XCFLAGS" \
    --with-poll_module \
    --with-http_ssl_module --with-http_v2_module --with-http_auth_request_module \
    --with-http_gunzip_module --with-http_gzip_static_module \
