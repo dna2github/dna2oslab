@@ -21,17 +21,12 @@ cd $ME
 mkdir -p 3rd
 cd 3rd
 tar zxf $ENVSRCTARBALL/$PCRE.tar.gz
+# clang does not support -V and -qversion
+sed -i 's|for ac_option in --version -v -V -qversion; do|for ac_option in --version -v; do|g' $PCRE/configure
 tar zxf $ENVSRCTARBALL/$OPENSSL.tar.gz
 tar zxf $ENVSRCTARBALL/$ZLIB.tar.gz
 cd ..
 mkdir -p dist
-
-if [ ! -d $MEDIR/../$ENVDISTBIN/$PCRE ]; then
-   bash $MEDIR/$PCRE.sh
-fi
-if [ ! -d $MEDIR/../$ENVDISTBIN/$ZLIB ]; then
-   bash $MEDIR/$ZLIB.sh
-fi
 
 grep "found but" . -r | cut -d ':' -f 1 | sort -u | xargs sed -i 's|.*NGX_AUTOTEST >> .*|if [ 1 == 1 ]; then|g'
 sed -i 's|ngx_size=`$NGX_AUTOTEST`|ngx_size=4|' auto/types/sizeof
@@ -70,12 +65,10 @@ export CFLAGS="$CFLAGS -I`pwd`/../dist/$PCRE/include -I`pwd`/../dist/$ZLIB/inclu
 export LDFLAGS="$LDFLAGS -L`pwd`/../dist/$PCRE/lib -L`pwd`/../dist/$ZLIB/lib"
 
 
-# pcre and zlib is needed for feature check but it does not compile pcre and zlib
-# it must be related to NGX_AUTOTEST where we disable all binary execution
 ./configure --prefix=$MEDIR/../$ME/dist/ \
    --with-openssl=`pwd`/3rd/$OPENSSL --with-openssl-opt="no-asm -fPIC" \
-   --with-pcre=`pwd`/3rd/$PCRE  --with-pcre-opt="$XCFLAGS" \
-   --with-zlib=`pwd`/3rd/$ZLIB  --with-zlib-opt="$XCFLAGS" \
+   --with-pcre=`pwd`/3rd/$PCRE \
+   --with-zlib=`pwd`/3rd/$ZLIB \
    --with-poll_module \
    --with-http_ssl_module --with-http_v2_module --with-http_auth_request_module \
    --with-http_gunzip_module --with-http_gzip_static_module \
@@ -93,7 +86,10 @@ sed -i 's|#define NGX_HAVE_SCHED_SETAFFINITY.*||' objs/ngx_auto_config.h
 sed -i 's|#define NGX_HAVE_CPUSET_SETAFFINITY.*||' objs/ngx_auto_config.h
 
 $CC -I$MEDIR/glob -c -o __glob.o $MEDIR/glob/glob.c
-sed -i "s|\(.*\) -lz|__glob.o \1 `pwd`/../dist/$PCRE/lib/libpcre.a `pwd`/../dist/$ZLIB/lib/libz.a|" objs/Makefile
+# pcre cross compiling
+sed -i "s|configure --disable-shared|configure --disable-shared $XCFLAGS|g" objs/Makefile
+# inject glob.o
+sed -i "s|\(.*libpcre\.a.*libssl\.a.*libcrypto\.a.*libz\.a\)|__glob.o \1|" objs/Makefile
 
 make
 make_install $ME
