@@ -2,7 +2,7 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=nginx-1.18.0
+ME=nginx-1.20.2
 PCRE=pcre-8.44
 OPENSSL=openssl-1.1.1i
 ZLIB=zlib-1.2.11
@@ -12,7 +12,7 @@ source env.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz http://nginx.org/download/nginx-1.18.0.tar.gz
+fetch_source $ME.tar.gz http://nginx.org/download/${ME}.tar.gz
 fetch_source $PCRE.tar.gz http://downloads.sourceforge.net/project/pcre/pcre/8.44/pcre-8.44.tar.gz
 fetch_source $OPENSSL.tar.gz https://www.openssl.org/source/openssl-1.1.1i.tar.gz
 fetch_source $ZLIB.tar.gz http://zlib.net/zlib-1.2.11.tar.gz
