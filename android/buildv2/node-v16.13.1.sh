@@ -2,14 +2,14 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=node-v16.13.0
+ME=node-v16.13.1
 
 cd $MEDIR
 source env.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz https://nodejs.org/dist/v16.13.0/node-v16.13.0.tar.gz
+fetch_source $ME.tar.gz https://nodejs.org/dist/v16.13.1/node-v16.13.1.tar.gz
 tar zxf $ENVSRCTARBALL/$ME.tar.gz
 cd $ME
 
@@ -57,6 +57,12 @@ export GYP_DEFINES
     --cross-compiling
 
 grep "LD_LIBRARY_PATH=" . -r | grep -v Binary | cut -d ':' -f 1 | sort -u | xargs sed -i "s|LD_LIBRARY_PATH=|LD_LIBRARY_PATH=$HOST_GCC_DIR/dist/lib64:|g"
+
+# make sure some functions are available in link stage
+sed -i 's|/poll.o \\|/poll.o \\\n\t$(obj).target/$(TARGET)/deps/uv/src/unix/epoll.o \\|' out/deps/uv/libuv.target.mk
+
+# disable TRAP_HANDLER
+sed -i "s|// Setup for shared library export.|#undef V8_TRAP_HANDLER_VIA_SIMULATOR\n#undef V8_TRAP_HANDLER_SUPPORTED\n#define V8_TRAP_HANDLER_SUPPORTED false\n\n// Setup for shared library export.|" deps/v8/src/trap-handler/trap-handler.h
 
 make -j4
 make install
