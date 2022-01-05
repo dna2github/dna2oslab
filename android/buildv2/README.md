@@ -19,8 +19,9 @@
    - haproxy-2.3.4.sh
    - ip\_relay\_1.1.sh
    - ncurses-6.2.sh
-   - nginx-1.18.0.sh
+   - nginx-1.20.2.sh
    - node-v14.15.4.sh
+   - node-v16.13.1.sh
    - openssl-1.1.1i.sh
    - pcre-8.44.sh
    - postgresql-13.1.sh
