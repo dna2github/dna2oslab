@@ -29,14 +29,14 @@ export CC="$COMPILERDIR/${ENVTARGET}${ENVANDROIDVER}-clang"
 export CXX="$COMPILERDIR/${ENVTARGET}${ENVANDROIDVER}-clang++"
 export LD="$COMPILERDIR/$ENVTARGET-ld"
 export AS="$COMPILERDIR/$ENVTARGET-as"
-export AR="$COMPILERDIR/$ENVTARGET-ar"
-export STRIP="$COMPILERDIR/$ENVTARGET-strip"
-export OBJCOPY="$COMPILERDIR/$ENVTARGET-objcopy"
-export OBJDUMP="$COMPILERDIR/$ENVTARGET-objdump"
-export RANLIB="$COMPILERDIR/$ENVTARGET-ranlib"
-export NM="$COMPILERDIR/$ENVTARGET-nm"
-export STRINGS="$COMPILERDIR/$ENVTARGET-strings"
-export READELF="$COMPILERDIR/$ENVTARGET-readelf"
+export AR="$COMPILERDIR/llvm-ar"
+export STRIP="$COMPILERDIR/llvm-strip"
+export OBJCOPY="$COMPILERDIR/llvm-objcopy"
+export OBJDUMP="$COMPILERDIR/llvm-objdump"
+export RANLIB="$COMPILERDIR/llvm-ranlib"
+export NM="$COMPILERDIR/llvm-nm"
+export STRINGS="$COMPILERDIR/llvm-strings"
+export READELF="$COMPILERDIR/llvm-readelf"
 
 export ANDROID="$COMPILERDIR/../sysroot"
 
@@ -56,4 +56,3 @@ function fetch_source() {
   test -f "$ENVSRCTARBALL/$1" || curl -k -L -o "$ENVSRCTARBALL/$1" "$2"
   test -f "$ENVSRCTARBALL/$1" || exit 1
 }
-
