@@ -31,3 +31,4 @@
    - vim-8.2.sh
    - wget2-1.99.2.sh
    - zlib-1.2.11.sh
+   - busybox-1.35.0.sh
