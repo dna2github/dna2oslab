@@ -83,3 +83,9 @@ cd ..
 rm -rf ${ME}
 
 echo 'It is experimental build; not tested for further usage ...'
+echo
+echo 'tested:'
+echo '   PROOT_NO_SECCOMP=1 PROOT_TMP_DIR=./tmp proot -0 -r ./root -b /dev:/dev /busybox ls'
+echo '# it works; but when the program exits, throw:'
+echo '# proot error: proot warning: signal 11 received from process 00000000'
+
