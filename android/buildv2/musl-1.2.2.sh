@@ -7,8 +7,6 @@ ME=musl-1.2.2
 cd $MEDIR
 source env.sh
 
-echo 'It is experimental build; not tested for further usage ...'
-
 cd ..
 rm -rf $ME
 fetch_source $ME.tar.gz https://musl.libc.org/releases/musl-1.2.2.tar.gz
@@ -28,3 +26,5 @@ sed -i 's|ARCH = arm|ARCH = aarch64|' config.mak
 
 make
 make_install $ME
+
+echo 'It is experimental build; not tested for further usage ...'
