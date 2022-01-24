@@ -7,6 +7,7 @@ ME=proot-5.3.0
 cd $MEDIR
 source env.sh
 
+export CROSS_COMPILE="--build=x86_64-linux --host=aarch64 --target=aarch64"
 ZLIB=zlib-1.2.11
 TALLOC=talloc-2.3.3
 LIBARCHIVE=libarchive-3.5.2
@@ -34,7 +35,7 @@ cd ${TALLOC}
 mkdir -p dist
 ./configure --prefix=`pwd`/dist --disable-python --cross-compile --cross-execute="echo -n linux #" --hostcc=gcc
 make
-${AR} rcs ../../staticlib/lib/libtalloc.a bin/default/talloc*.o bin/default/lib/replace/replace*.o
+${AR} rcs ../../staticlib/lib/libtalloc.a bin/default/talloc*.o
 cp talloc.h ../../staticlib/include/talloc.h
 cd ..
 
@@ -66,7 +67,7 @@ sed -i "s|STRIP.*=.*strip||" src/GNUmakefile
 sed -i "s|OBJCOPY.*=.*objcopy||" src/GNUmakefile
 sed -i "s|OBJDUMP.*=.*objdump||" src/GNUmakefile
 sed -i "s|^CARE_LDFLAGS = .*|CARE_LDFLAGS = -L`pwd`/staticlib/lib -L${DISTEN}/${ZLIB}/lib -larchive -lz|" src/GNUmakefile
-sed -i "s|get_current_dir_name|rep_get_current_dir_name|g" src/path/temp.c
+sed -i "s|get_current_dir_name()|getenv(\"PROOT_CWD\")|g" src/path/temp.c
 unset CROSS_COMPILE
 make -C src loader.elf build.h
 make -C src proot care
@@ -82,10 +83,5 @@ cp src/loader.elf ${DISTDIR}/${ME}/sbin/
 cd ..
 rm -rf ${ME}
 
-echo 'It is experimental build; not tested for further usage ...'
-echo
-echo 'tested:'
-echo '   PROOT_NO_SECCOMP=1 PROOT_TMP_DIR=./tmp proot -0 -r ./root -b /dev:/dev /busybox ls'
-echo '# it works; but when the program exits, throw:'
-echo '# proot error: proot warning: signal 11 received from process 00000000'
-
+echo 'tested on Android device (build busybox and put into ./root):'
+echo '   PROOT_NO_SECCOMP=1 PROOT_TMP_DIR=./tmp ./proot -0 -r ./root -b /dev:/dev /busybox ls'
