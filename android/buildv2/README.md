@@ -33,4 +33,5 @@
    - zlib-1.2.11.sh
    - busybox-1.35.0.sh
    - proot-5.3.0.sh
+   - strace-5.16.sh
    - musl-1.2.2.sh (experimental)
