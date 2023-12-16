@@ -2,14 +2,14 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=zlib-1.2.11
+ME=zlib-1.3
 
 cd $MEDIR
 source env.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz http://zlib.net/zlib-1.2.11.tar.gz
+fetch_source $ME.tar.gz http://zlib.net/$ME.tar.gz
 tar zxf $ENVSRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
