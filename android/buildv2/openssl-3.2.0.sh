@@ -2,14 +2,14 @@
 set -xe
 
 MEDIR=$(cd `dirname $0`; pwd)
-ME=openssl-1.1.1i
+ME=openssl-3.2.0
 
 cd $MEDIR
 source env.sh
 
 cd ..
 rm -rf $ME
-fetch_source $ME.tar.gz https://www.openssl.org/source/openssl-1.1.1i.tar.gz
+fetch_source $ME.tar.gz https://www.openssl.org/source/openssl-3.2.0.tar.gz
 tar zxf $ENVSRCTARBALL/$ME.tar.gz
 cd $ME
 mkdir -p dist
