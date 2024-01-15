@@ -2,9 +2,9 @@
 
 ## How to build
 
-1. download Google Android Native Development Kits (NDK)
-3. edit `env.sh` or create `local/env.sh` to overwrite env vars
-4. run specific shell script to build binaries
+1. download Google Android Native Development Kits (NDK); it is better to build in Linux
+2. edit `env.sh` or create `local/env.sh` to overwrite env vars
+3. run specific shell script to build binaries
 
 ## How to use binary file in Android application
 
@@ -22,7 +22,9 @@
    - nginx-1.20.2.sh
    - node-v14.15.4.sh
    - node-v16.13.1.sh
+   - node-v20.10.0.sh
    - openssl-1.1.1i.sh
+   - openssl-3.2.0.sh
    - pcre-8.44.sh
    - postgresql-13.1.sh
    - sqlite-autoconf-3340100.sh
