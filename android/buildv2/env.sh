@@ -9,7 +9,7 @@ export ENVDISTBIN="dist"
 export ENVHOST=linux-x86_64
 export ENVTARGET=aarch64-linux-android
 export ENVANDROIDVER=23
-export CROSS_COMPILE="--build=x86_64-linux --host=arm-eabi --target=arm-eabi"
+export CROSS_COMPILE=" --build=x86_64-linux --host=arm-eabi --target=arm-eabi "
 
 if [ -f $SELF/local/env.sh ]; then
    source $SELF/local/env.sh
